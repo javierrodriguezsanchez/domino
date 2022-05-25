@@ -12,7 +12,7 @@ public interface IEstrategia
 
 public interface IRoundScore
 {
-    public int PlayerScore(Player player, Table table);
+    public void PlayerScore(int[] OlderScore, Player[] players, int winner);
 }
 
 public interface IPieceValue

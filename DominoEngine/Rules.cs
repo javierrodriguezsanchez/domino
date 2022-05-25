@@ -10,6 +10,8 @@ public class Rules
     public Piece[] PiecesOfThePlay{get; private set;}
     public int InitialPiecesInHand{get; private set;}
     //holds how many pieces initialy have every player at the start of the game
+    private int PointsToWin;
+
     private IOrder OrderToPlay;
     //holds the order of the turns of every player
     private ILegalPlay CheckMove;
@@ -18,6 +20,7 @@ public class Rules
     //Holds the way check if someone win
     private IPieceValue PieceValue;
     //holds the opinion of value for a piece
+    private IRoundScore RoundScore;
     public Rules()
     //by default create a simple domino 9 game
     {
@@ -28,7 +31,10 @@ public class Rules
         CheckMove = new StandartRules();
         ConditionToWin = new StandartRules();
         PieceValue = new StandartRules();
+        RoundScore = new StandartRules();
+        PointsToWin = 1;
     }
+
     public int GetNextPlayer()
     //get the next player's turn 
     {
@@ -49,6 +55,12 @@ public class Rules
     {
         return PieceValue.GetValue(piece);
     }
+    public void GetScore(int[] ActualScore, Player[] players, int Winner)
+    //actualize the score
+    {
+        PlayerScore(ActualScore, players, Winner);
+    }
+    
     private Piece[] Standart(int n)
     //gets a doble n domino(doble 6, doble 9...)
     {
@@ -58,7 +70,6 @@ public class Rules
             for(int j=i;j<=n;j++)
                 newPieces[count++]=new Piece(new int[]{i,j});
     }
-
     public Repart(Player[] players)
     {
         List<Piece> pieces= new List<Piece>(PiecesOfThePlay);
@@ -75,9 +86,12 @@ public class Rules
             players[i].newHand(hand);    
         }
     }
+    
     public void NewSetOfPieces(Piece[] newSet)
     //change the current pieces for those ones in the argument
     {
+        if(newSet==null || newSet<=0)
+            throw ArgumentException("Invalid Argument");
         PiecesOfThePlay=newSet;
         if(NumberOfPlayers<PiecesOfThePlay.Length)
             NumberOfPlayers=PiecesOfThePlay.Length;
@@ -92,6 +106,10 @@ public class Rules
     }
     public void ChangePieces(int newLimit,int NewInitialPiecesInHand=InitialPiecesInHand,int newNumberOfPlayers=NumberOfPlayers)
     {
+        if (newLimit<=0)
+        {
+            throw ArgumentException("Invalid Argument");
+        }
         if((newLimit+1)*newLimit/2+newLimit+1<newNumberOfPlayers*newInitialPiecesInHand)
             throw ArgumentException("Can't distribute this Pieces between the Players");
         NumberOfPlayers=newNumberOfPlayers;
@@ -124,6 +142,13 @@ public class Rules
     //change the condition to win
     {
         ConditionToWin=newWin;
+    }
+    public void ChangeLimit(int newLimit)
+    {
+        if(newLimit<=0)
+            throw ArgumentException("Invalid Argument. Must be bigger than 0");
+        else
+            PointsToWin=newLimit;
     }
 }
 
