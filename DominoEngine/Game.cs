@@ -25,7 +25,8 @@ public class Game
     public void NextPlay()
     {
         int i=rules.GetNextPlayer();
-        //algo
+        rules.PlayTurn(Jugador[i],table);
+        
     }
     public void RoundEnd()
     {
@@ -42,12 +43,12 @@ public class Player
         this.Hand=Hand;
         this.estrategia=estrategia;
     }
-    public Ficha Play(Rules rules, Table table)
+    public (Ficha,int) Play(Rules rules, Table table)
     {
-        int i=estrategia.Play(Hand,table,rules);
-        Piece SelectedPiece = Hand[i];
-        Hand.Remove(i);
-        return SelectedPiece;
+        (int,int) selection=estrategia.Play(Hand,table,rules);
+        Piece SelectedPiece = Hand[selection.Item1];
+        Hand.Remove(selection.Item1);
+        return (SelectedPiece,selection.Item2);
     }
     public Piece Take(Rules rules, Table table)
     {
@@ -84,8 +85,15 @@ public class Piece
 public class Table
 {
     public int[] WhereToPlay{get;private set;}
-    public int NewPiece(int value,int pos)
+    public void NewPiece(int value,int pos)
     {
+
         WhereToPlay[pos]=value;
+    }
+    public void NewPiece(Piece piece, int pos)
+    {
+        if(piece.values[0]==WhereToPlay[pos])
+            WhereToPlay[pos]=piece.values[1];
+        WhereToPlay[pos]=piece.values[0];
     }
 }

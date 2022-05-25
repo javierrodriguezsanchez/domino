@@ -1,8 +1,9 @@
 using System;
 using DominoInterfaces;
 using DominoGame;
+using DominoRules;
 
-public class StandartRules : IOrder,ILegalPlay,IWinCondition,IPieceValue,IRoundScore
+public class StandartRules : IOrder,ILegalPlay,IWinCondition,IPieceValue,IRoundScore,IPlayerTurn
 //make the usual rules of the domino
 {
     private int LastPlayer;
@@ -57,5 +58,13 @@ public class StandartRules : IOrder,ILegalPlay,IWinCondition,IPieceValue,IRoundS
     public override void PlayerScore(int[] OlderScore, Player[] players, int winner)
     {
         OlderScore[winner]++;
+    }
+
+    public override void Play(Player player, Table table, Rules rules)
+    {
+        (Piece,int) Selection = player.Play(rules,table);
+        if(Selection.Item1==null)
+            return;
+        table.NewPiece(Selection,Selection.Item2);
     }
 }

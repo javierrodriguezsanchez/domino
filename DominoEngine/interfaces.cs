@@ -33,3 +33,9 @@ public interface IWinCondition
 {
     public int Win(Player[] players, Table table);
 }
+
+
+public interface IPlayerTurn
+{
+    public void Play(Player player, Table table, Rules rules);
+}

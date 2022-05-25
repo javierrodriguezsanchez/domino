@@ -12,15 +12,16 @@ public class Rules
     //holds how many pieces initialy have every player at the start of the game
     private int PointsToWin;
 
-    private IOrder OrderToPlay;
+    public IOrder OrderToPlay{get;private set;}
     //holds the order of the turns of every player
-    private ILegalPlay CheckMove;
+    public ILegalPlay CheckMove{get;private set;}
     //Holds the way to check if some piece could be played in the table
-    private IWinCondition ConditionToWin;
+    public IWinCondition ConditionToWin{get;private set;}
     //Holds the way check if someone win
-    private IPieceValue PieceValue;
+    public IPieceValue PieceValue{get;private set;}
     //holds the opinion of value for a piece
-    private IRoundScore RoundScore;
+    public IPlayerTurn PlayerTurn{get;private set;}
+    public IRoundScore RoundScore{get;private set;}
     public Rules()
     //by default create a simple domino 9 game
     {
@@ -32,9 +33,14 @@ public class Rules
         ConditionToWin = new StandartRules();
         PieceValue = new StandartRules();
         RoundScore = new StandartRules();
+        PlayerTurn = new StandartRules();
         PointsToWin = 1;
     }
 
+    public void PlayTurn(Player player, Table table)
+    {
+        PlayerTurn.Play(player,table,this);
+    }
     public int GetNextPlayer()
     //get the next player's turn 
     {
@@ -60,7 +66,6 @@ public class Rules
     {
         PlayerScore(ActualScore, players, Winner);
     }
-    
     private Piece[] Standart(int n)
     //gets a doble n domino(doble 6, doble 9...)
     {
@@ -70,7 +75,7 @@ public class Rules
             for(int j=i;j<=n;j++)
                 newPieces[count++]=new Piece(new int[]{i,j});
     }
-    public Repart(Player[] players)
+    public void Repart(Player[] players)
     {
         List<Piece> pieces= new List<Piece>(PiecesOfThePlay);
         Random random;
@@ -116,32 +121,36 @@ public class Rules
         InitialPiecesInHand=NewInitialPiecesInHand;
         PiecesOfThePlay=Standart(newLimit);
     }
-    public int NewInitialDistribution(int newNumber)
+    public void NewInitialDistribution(int newNumber)
     //change the numbers of pieces per player at the start of the game
     {
         if(newNumber*InitialPiecesInHand>PiecesOfThePlay)
             throw ArgumentException("Number of players must be less than the number of pieces");
         InitialPiecesInHand=newNumber;
     }
-    public int ChangeOrderToPlay(IOrder newOrder)
+    public void ChangeOrderToPlay(IOrder newOrder)
     //change the order to play
     {
         OrderToPlay=newOrder;
     }
-    public int NewConditionToPlay(ILegalPlay newRule)
+    public void NewConditionToPlay(ILegalPlay newRule)
     //change the rules of the play
     {
         CheckMove=newRule;
     }
-    public int NewValue(IPieceValue newPieceValue)
+    public void NewValue(IPieceValue newPieceValue)
     //change the criterio of value of the pieces
     {
         PieceValue=newPieceValue;
     }
-    public int NewConditionToWin(IWinCondition newWin)
+    public void NewConditionToWin(IWinCondition newWin)
     //change the condition to win
     {
         ConditionToWin=newWin;
+    }
+    public void ChangePlayersTurn(IPlayerTurn PlayerTurn)
+    {
+        this.PlayerTurn=PlayerTurn;
     }
     public void ChangeLimit(int newLimit)
     {
