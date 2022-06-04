@@ -1,0 +1,30 @@
+D:\Proyecto programacion 2\bin\Debug\net6.0\Proyecto programacion 2.exe
+D:\Proyecto programacion 2\bin\Debug\net6.0\Proyecto programacion 2.deps.json
+D:\Proyecto programacion 2\bin\Debug\net6.0\Proyecto programacion 2.runtimeconfig.json
+D:\Proyecto programacion 2\bin\Debug\net6.0\Proyecto programacion 2.dll
+D:\Proyecto programacion 2\bin\Debug\net6.0\ref\Proyecto programacion 2.dll
+D:\Proyecto programacion 2\bin\Debug\net6.0\Proyecto programacion 2.pdb
+D:\Proyecto programacion 2\obj\Debug\net6.0\Proyecto programacion 2.csproj.AssemblyReference.cache
+D:\Proyecto programacion 2\obj\Debug\net6.0\Proyecto programacion 2.GeneratedMSBuildEditorConfig.editorconfig
+D:\Proyecto programacion 2\obj\Debug\net6.0\Proyecto programacion 2.AssemblyInfoInputs.cache
+D:\Proyecto programacion 2\obj\Debug\net6.0\Proyecto programacion 2.AssemblyInfo.cs
+D:\Proyecto programacion 2\obj\Debug\net6.0\Proyecto programacion 2.csproj.CoreCompileInputs.cache
+D:\Proyecto programacion 2\obj\Debug\net6.0\Proyecto programacion 2.dll
+D:\Proyecto programacion 2\obj\Debug\net6.0\ref\Proyecto programacion 2.dll
+D:\Proyecto programacion 2\obj\Debug\net6.0\Proyecto programacion 2.pdb
+D:\Proyecto programacion 2\obj\Debug\net6.0\Proyecto programacion 2.genruntimeconfig.cache
+C:\Users\Javier\Desktop\Domino\domino-main\domino\bin\Debug\net6.0\Proyecto programacion 2.exe
+C:\Users\Javier\Desktop\Domino\domino-main\domino\bin\Debug\net6.0\Proyecto programacion 2.deps.json
+C:\Users\Javier\Desktop\Domino\domino-main\domino\bin\Debug\net6.0\Proyecto programacion 2.runtimeconfig.json
+C:\Users\Javier\Desktop\Domino\domino-main\domino\bin\Debug\net6.0\Proyecto programacion 2.dll
+C:\Users\Javier\Desktop\Domino\domino-main\domino\bin\Debug\net6.0\ref\Proyecto programacion 2.dll
+C:\Users\Javier\Desktop\Domino\domino-main\domino\bin\Debug\net6.0\Proyecto programacion 2.pdb
+C:\Users\Javier\Desktop\Domino\domino-main\domino\obj\Debug\net6.0\Proyecto programacion 2.csproj.AssemblyReference.cache
+C:\Users\Javier\Desktop\Domino\domino-main\domino\obj\Debug\net6.0\Proyecto programacion 2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Javier\Desktop\Domino\domino-main\domino\obj\Debug\net6.0\Proyecto programacion 2.AssemblyInfoInputs.cache
+C:\Users\Javier\Desktop\Domino\domino-main\domino\obj\Debug\net6.0\Proyecto programacion 2.AssemblyInfo.cs
+C:\Users\Javier\Desktop\Domino\domino-main\domino\obj\Debug\net6.0\Proyecto programacion 2.csproj.CoreCompileInputs.cache
+C:\Users\Javier\Desktop\Domino\domino-main\domino\obj\Debug\net6.0\Proyecto programacion 2.dll
+C:\Users\Javier\Desktop\Domino\domino-main\domino\obj\Debug\net6.0\ref\Proyecto programacion 2.dll
+C:\Users\Javier\Desktop\Domino\domino-main\domino\obj\Debug\net6.0\Proyecto programacion 2.pdb
+C:\Users\Javier\Desktop\Domino\domino-main\domino\obj\Debug\net6.0\Proyecto programacion 2.genruntimeconfig.cache
