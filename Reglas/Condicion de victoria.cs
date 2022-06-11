@@ -1,7 +1,10 @@
 using DominoGame;
 using DominoTable;
-namespace DominoRules;
-
+using System.Collections;
+using System.Linq;
+using System;
+namespace DominoRules
+{
 public interface  IEndCondition{
    public bool EndOfTheGame(Game juego);
    public int Winner(Game Juego);
@@ -23,10 +26,10 @@ class finalPorPuntos: FinPorTranque{
         bool empate = true;
         int candidato = -1;
         int minimo = int.MaxValue;
-        for (int i = 0; i < juego.Jugadores.Count(); i++)
+        for (int i = 0; i < juego.Jugadores.Length; i++)
         {
               int total = 0;
-              IEnumerable<Piece> mano = juego.Jugadores[i].mostrarMano();
+              var mano = juego.Jugadores[i].mostrarMano();
               foreach (var ficha in mano){
                   total += juego.reglas.evaluador.Evaluar(ficha);
               }
@@ -66,4 +69,5 @@ class finalPorCantidad: FinPorTranque{
         }
         else return candidato;
     }
+}
 }

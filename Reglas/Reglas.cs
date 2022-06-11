@@ -1,6 +1,6 @@
 using System;
 
-namespace DominoRules;
+namespace DominoRules{
 public class Rules{
    public int numero_de_Jugadores{get; private set;}
    public int Cantidad_Inicial_En_La_Mano{get; private set;}
@@ -69,4 +69,5 @@ public class Rules{
    {
       this.turno=PlayerTurn;
    }
+}
 }

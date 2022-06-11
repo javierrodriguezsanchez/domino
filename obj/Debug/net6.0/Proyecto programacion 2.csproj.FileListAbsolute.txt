@@ -28,3 +28,18 @@ C:\Users\Javier\Desktop\Domino\domino-main\domino\obj\Debug\net6.0\Proyecto prog
 C:\Users\Javier\Desktop\Domino\domino-main\domino\obj\Debug\net6.0\ref\Proyecto programacion 2.dll
 C:\Users\Javier\Desktop\Domino\domino-main\domino\obj\Debug\net6.0\Proyecto programacion 2.pdb
 C:\Users\Javier\Desktop\Domino\domino-main\domino\obj\Debug\net6.0\Proyecto programacion 2.genruntimeconfig.cache
+C:\Proyecto de pro 2\domino\bin\Debug\net6.0\Proyecto programacion 2.exe
+C:\Proyecto de pro 2\domino\bin\Debug\net6.0\Proyecto programacion 2.deps.json
+C:\Proyecto de pro 2\domino\bin\Debug\net6.0\Proyecto programacion 2.runtimeconfig.json
+C:\Proyecto de pro 2\domino\bin\Debug\net6.0\Proyecto programacion 2.dll
+C:\Proyecto de pro 2\domino\bin\Debug\net6.0\Proyecto programacion 2.pdb
+C:\Proyecto de pro 2\domino\obj\Debug\net6.0\Proyecto programacion 2.csproj.AssemblyReference.cache
+C:\Proyecto de pro 2\domino\obj\Debug\net6.0\Proyecto programacion 2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Proyecto de pro 2\domino\obj\Debug\net6.0\Proyecto programacion 2.AssemblyInfoInputs.cache
+C:\Proyecto de pro 2\domino\obj\Debug\net6.0\Proyecto programacion 2.AssemblyInfo.cs
+C:\Proyecto de pro 2\domino\obj\Debug\net6.0\Proyecto programacion 2.csproj.CoreCompileInputs.cache
+C:\Proyecto de pro 2\domino\obj\Debug\net6.0\Proyecto programacion 2.dll
+C:\Proyecto de pro 2\domino\obj\Debug\net6.0\refint\Proyecto programacion 2.dll
+C:\Proyecto de pro 2\domino\obj\Debug\net6.0\Proyecto programacion 2.pdb
+C:\Proyecto de pro 2\domino\obj\Debug\net6.0\Proyecto programacion 2.genruntimeconfig.cache
+C:\Proyecto de pro 2\domino\obj\Debug\net6.0\ref\Proyecto programacion 2.dll

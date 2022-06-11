@@ -1,7 +1,7 @@
 using System;
 using DominoTable;
-
-namespace DominoRules;
+using System.Collections.Generic;
+namespace DominoRules{
 
 public class GamePieces{
     List<Piece> Fichas;
@@ -26,4 +26,5 @@ public class GamePieces{
         return lista;
     }
     public int Length{ get{return Fichas.Count;}}
+}
 }

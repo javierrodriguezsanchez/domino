@@ -1,30 +1,28 @@
 using DominoTable;
 
-namespace DominoRules;
+namespace DominoRules{
 
 public interface ILegalPlay
 {
-    public bool IsLegal(Table mesa, Piece ficha,int pos);
+    public bool IsLegal(Table mesa, Piece ficha,int pos, int cara);
 }
 
 public class RegularLegalPlay:ILegalPlay
 {
-    public virtual bool IsLegal(Table mesa, Piece ficha,int pos)
+    public virtual bool IsLegal(Table mesa, Piece ficha,int pos, int cara)
     {
         if(mesa.nuevaMesa)
             {return true;}
-            for (int i = 0; i < ficha.values.Length; i++){
-                if(mesa[pos] == ficha.values[i]){
-                     return true;
-                }
-        }
+
+                if(mesa[pos] == ficha.values[cara]){
+                     return true;   }
         return false;
     }
 }
 
 public class AlwaysCanUseDobles:RegularLegalPlay
 {
-    public override bool IsLegal(Table mesa, Piece ficha,int pos)
+    public override bool IsLegal(Table mesa, Piece ficha,int pos, int cara)
     {
         int value=ficha.values[0];
         bool IsDouble=true;
@@ -36,6 +34,13 @@ public class AlwaysCanUseDobles:RegularLegalPlay
             }
         if(IsDouble)
             return true;
-        return base.IsLegal(mesa,ficha,pos);
+        return base.IsLegal(mesa,ficha,pos, cara);
     }   
 }
+}
+/* public class Escareromino:ILegalPlay{
+    public bool IsLegal(Table mesa, Piece ficha, int pos){
+
+    }
+}
+}*/

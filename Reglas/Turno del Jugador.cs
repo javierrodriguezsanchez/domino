@@ -1,20 +1,20 @@
 using DominoTable;
 using DominoPlayer;
 using DominoGame;
-namespace DominoRules;
-
+namespace DominoRules
+{
 public interface ITurn
 {
-    public (Piece, int) Play(Player Jugador, Game Juego);
+    public (Piece, int,int) Play(Player Jugador, Game Juego);
 }
 
 public class NormalTurn:ITurn
 {
-    public (Piece, int) Play(Player Jugador, Game Juego)
+    public (Piece, int,int) Play(Player Jugador, Game Juego)
     {
-        (Piece, int) AJugar = Jugador.Play(Juego.tablero,Juego.reglas);
+        (Piece, int,int) AJugar = Jugador.Play(Juego.tablero,Juego.reglas);
         
-        if(AJugar.Item2 == int.MaxValue){
+        if(AJugar.Item1.IsNull){
                 Juego.pasadosSeguidos ++;
                 return AJugar;
         }
@@ -22,16 +22,13 @@ public class NormalTurn:ITurn
             Juego.tablero.nuevaMesa = false;
             Juego.tablero[0] = AJugar.Item1.values[0];
             Juego.tablero[1] = AJugar.Item1.values[1];
-            return (AJugar.Item1, -1);
+            return (AJugar.Item1, -1,-1);
         }
-         
-        if(Juego.tablero.Disponibles[AJugar.Item2] == AJugar.Item1.values[0]){
-            Juego.tablero.Disponibles[AJugar.Item2] = AJugar.Item1.values[1]; }
-        else
-        {
-            Juego.tablero.Disponibles[AJugar.Item2] = AJugar.Item1.values[0];
-        }
+        
+        if(Juego.reglas.jugadaLegal.IsLegal(Juego.tablero,AJugar.Item1,AJugar.Item2,AJugar.Item3))
+            Juego.tablero[AJugar.Item2]=AJugar.Item1.values[AJugar.Item3];
         return AJugar;
         
     }
+}
 }

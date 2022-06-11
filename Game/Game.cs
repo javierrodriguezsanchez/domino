@@ -3,7 +3,7 @@ using DominoPlayer;
 using DominoRules;
 using DominoTable;
 
-namespace DominoGame;
+namespace DominoGame{
 public class Game{
     public int turno = 1;
     public int pasadosSeguidos = 0;//sirve para diferentes condiciones de victoria
@@ -22,7 +22,7 @@ public class Game{
        }
        this.Jugadores = Jugadores;
     } 
-    public (Piece, int) Jugar() {
+    public (Piece, int,int) Jugar() {
         return reglas.turno.Play(Jugadores[JugadorActual],this);
     }
      public bool SeAcabo(){
@@ -37,4 +37,5 @@ public class Game{
      public void AvanzarTurno(){
          turno ++;
      }
+}
 }

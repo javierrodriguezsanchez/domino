@@ -15,7 +15,7 @@ Game juego = new Game(new Player[]
 Console.WriteLine("Ha comenzado el juego!!!!!!!!!! :D");
 while(true){
     Console.WriteLine("Turno # {0} \n Le toca jugar a {1} \n Le quedan {2} fichas", juego.turno, juego.NombreJugadorActual, juego.cantFichasJugadorActual);
-    (Piece, int) jugada = juego.Jugar();
+    (Piece, int,int) jugada = juego.Jugar();
     if(jugada.Item2 == int.MaxValue){
         Console.WriteLine("{0} se ha pasado :(", juego.JugadorActual);}
     else{

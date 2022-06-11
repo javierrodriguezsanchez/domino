@@ -1,8 +1,8 @@
 using System;
 using DominoTable;
 
- namespace DominoRules;
-
+ namespace DominoRules
+ {
  public interface IEvaluadorFichas{
     int Evaluar(Piece Ficha);
  }
@@ -15,3 +15,4 @@ using DominoTable;
          return suma;
      }
  }
+}
