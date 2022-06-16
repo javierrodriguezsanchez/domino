@@ -25,7 +25,9 @@ public class estrategiaBotaGorda: IEstrategia{
     }
 }
 /*public class estrategiaRandom: IEstrategia{
-    public(int, int)
+    public(Piece, int, int) Play(IEnumerable<Piece> mano, Table mesa, Rules reglas){
+        
+    }
 }*/
 
 static class JugadasComunes{

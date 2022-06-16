@@ -12,7 +12,7 @@ public class NormalTurn:ITurn
 {
     public (Piece, int,int) Play(Player Jugador, Game Juego)
     {
-        (Piece, int,int) AJugar = Jugador.Play(Juego.tablero,Juego.reglas);
+        (Piece, int,int) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual], Juego.tablero,Juego.reglas);
         
         if(AJugar.Item1.IsNull){
                 Juego.pasadosSeguidos ++;
@@ -27,6 +27,7 @@ public class NormalTurn:ITurn
         
         if(Juego.reglas.jugadaLegal.IsLegal(Juego.tablero,AJugar.Item1,AJugar.Item2,AJugar.Item3))
             Juego.tablero[AJugar.Item2]=AJugar.Item1.values[AJugar.Item3];
+            Juego.pasadosSeguidos = 0;
         return AJugar;
         
     }

@@ -10,16 +10,18 @@ public class Rules{
    public IEvaluadorFichas evaluador;
    public ITurn turno;
    public ILegalPlay jugadaLegal;
+   public IWinner ganador;
 
-   public Rules()
+   public Rules()   //Feisima esta clase, pero weno, no la voa tocar por ahora.
    {
       numero_de_Jugadores=4;
-      Cantidad_Inicial_En_La_Mano=10;
-      Fichas_Del_Juego=new GamePieces(9);
-      final=new finalPorPuntos();
+      Cantidad_Inicial_En_La_Mano=7;
+      Fichas_Del_Juego=new GamePieces(6);
+      final=  new FinPorTranque();
       evaluador=new EvaluadorSuma();
       turno=new NormalTurn();
-      jugadaLegal = new RegularLegalPlay();
+      jugadaLegal = new AlwaysCanUseDobles();
+      ganador = new finalPorPuntos();
    }
 
    public void NewSetOfPieces(GamePieces newSet)

@@ -1,4 +1,5 @@
 using DominoTable;
+using System;
 
 namespace DominoRules{
 
@@ -37,10 +38,21 @@ public class AlwaysCanUseDobles:RegularLegalPlay
         return base.IsLegal(mesa,ficha,pos, cara);
     }   
 }
-}
-/* public class Escareromino:ILegalPlay{
-    public bool IsLegal(Table mesa, Piece ficha, int pos){
 
+ public class Escareromino: ILegalPlay{
+    public bool IsLegal(Table mesa, Piece ficha, int pos, int cara){
+         if(mesa.nuevaMesa ||ficha.values[cara]== 0 || ficha.values[cara] == mesa.Disponibles[pos] + 1){
+             return true;
+         }
+         return false;
     }
 }
-}*/
+ public class Piramiomino: ILegalPlay{
+     public bool IsLegal(Table mesa, Piece ficha, int pos, int cara){
+         if(mesa.nuevaMesa|| Math.Abs(ficha.values[cara] - mesa.Disponibles[pos]) == 1){
+             return true;
+         }
+         return false;
+     }
+ }
+}
