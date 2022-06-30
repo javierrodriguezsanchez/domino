@@ -6,18 +6,20 @@ using DominoTable;
 
 Torney torneo = new Torney(new Player[]
 {
-    new Player("Juanito", new estrategiaBotaGorda(),1 ),
-    new Player("Fefito", new estrategiaBotaGorda(),1 ), 
-    new Player("Menganito", new estrategiaBotaGorda(),1), 
-    new Player("Esperancejo", new estrategiaBotaGorda(),1)
+    new Player("Juanito", new BotaMasRepetida(),1 ),
+    new Player("Fefito", new BotaMasRepetida(),2 ), 
+    new Player("Menganito", new estrategiaBotaGorda(),3), 
+    new Player("Esperancejo", new estrategiaBotaGorda(),4)
 }, new Rules());
 
 Console.WriteLine("Ha comenzado el juego!!!!!!!!!! :D");
 
-while(true){
-    foreach (Game item in torneo.JuegoActual){
-      Console.WriteLine("Es el turno del jugador {0}", item.JugadorActual.nombre);  
-      Console.WriteLine("El jugador actual ha jugado el{0}", item.jugadas[item.jugadas.Count-1].Item1);
+foreach (var Game in torneo)
+{
+  foreach (var escena in torneo.JuegoActual){
+      Console.WriteLine("Es el turno del jugador {0}", escena.JugadorUltimaJugada.Nombre);  
+      Console.WriteLine("El jugador actual ha jugado el {0} por la {1}", escena.ultimaFicha, escena.posicionUltimaJugada);
     }
-    }
-   
+    Console.WriteLine("Nuevo juego");
+}
+    Console.WriteLine("Se acabo el torneo \n Ganador: Equipo {0}", torneo.Ganador);   

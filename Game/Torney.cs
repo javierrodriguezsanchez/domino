@@ -1,59 +1,63 @@
+using System.Collections;
 using DominoPlayer;
 using DominoRules;
 using DominoTable;
-using System.Collections.Generic;
-namespace DominoGame{
 
-public class Torney
-{
-    Player[] jugadores;
-    Rules reglas;
-    public Game JuegoActual;
-    Dictionary<int, double> Scores = new Dictionary<int, double>();
-    public Torney(Player[] jugadores, Rules reglas){
+namespace DominoGame;
+public class Torney: IEnumerable<Game> {
+	Player[] _jugadores; 
+	public readonly Rules Reglas;
+	public Game JuegoActual;
+	public Dictionary<int, double> Scores = new();
+	//Diccionario que a cada equipo le hace corresponder su puntuacion
+	public int Ganador = -1;
+	public bool primerMovenext = true;
+
+	public Torney(Player[] jugadores, Rules reglas) {
+		_jugadores = jugadores;
+		Reglas = reglas;
+		JuegoActual = new Game(jugadores, reglas);
+        foreach (var jug in jugadores){
+			if(!Scores.ContainsKey(jug.Equipo)){
+                Scores.Add(jug.Equipo, 0);
+			}
+		}
+	}	
+
+	void RepartidorDePuntos() => Reglas.TipoDeTorneo.RepartidorDePuntos(this);
+		
+	void NuevaPartida() => JuegoActual = new Game(_jugadores, Reglas);
+
+	bool SeAcabo() => Reglas.TipoDeTorneo.SeAcabo(this);
+
+    public IEnumerator<Game> GetEnumerator() => new Enumerator(this);
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    
+    class Enumerator : IEnumerator<Game>
     {
-       this.jugadores = jugadores;
-       this.reglas = reglas;
-       this.JuegoActual = new Game(jugadores, reglas);
-    }
-
-    IEnumerable<Game> JugarUnJuego(Game juego){
-        foreach (Game turnos in juego)
-        {
-            yield return turnos;
+		Torney _torn;
+        public Enumerator(Torney torn) {
+			_torn= torn;
         }
-    }
-     void RepartidorDePuntos(Dictionary<int, double> scores, Game juego, Rules reglas){
-             int ganador = reglas.ganador.Winner(juego);
-             if(ganador == -1){
-                 return;
-             }
-             double Score = 0;
-             foreach (var jugador in juego.Jugadores)
-             {
-                 if(jugador.equipo == ganador){
-                     continue;
-                 }
-                 foreach (Piece ficha in juego.manos[jugador])
-                 {
-                     Score += reglas.evaluador.Evaluar(ficha);
-                 }
-             }
-             Scores[ganador] += Score;
-    }
-    void NextGame(){
-        JuegoActual = new Game(jugadores, reglas);
-    }
-    bool SeAcabo(){
-        foreach (double puntuacion in Scores.Values)
-        {
-            if(puntuacion>= 100){
-                return true;
-            }
-        }
-        return false;
-    }
-    }
-}
 
+        public Game Current => _torn.JuegoActual;
+
+        object IEnumerator.Current => Current;
+
+        public void Dispose(){}
+        public bool MoveNext(){
+			if(_torn.primerMovenext){
+				_torn.primerMovenext = false;
+				return true;
+			}
+            _torn.RepartidorDePuntos();
+			if (_torn.SeAcabo()){
+				return false;
+			}
+			_torn.NuevaPartida();
+			return true;
+        }
+        public void Reset() => _torn = new(_torn._jugadores, _torn.Reglas);
+    }
 }
