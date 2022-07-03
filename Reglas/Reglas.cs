@@ -2,7 +2,6 @@ using System;
 
 namespace DominoRules{
 public class Rules{
-
    public int Cantidad_Inicial_En_La_Mano{get; private set;}
    //holds how many pieces initialy have every player at the start of the game
    
