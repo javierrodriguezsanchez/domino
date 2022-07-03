@@ -10,7 +10,7 @@ public class GamePieces{
          Fichas = generador(cant);
     }
     public Piece TomarUna(){
-       Random r = new Random();
+       Random r = new ();
        int fichaSeleccionada = r.Next(Fichas.Count - 1);
        Piece devolver = Fichas[fichaSeleccionada];
        Fichas.RemoveAt(fichaSeleccionada);
