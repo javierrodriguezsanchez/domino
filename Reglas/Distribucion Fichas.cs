@@ -23,8 +23,14 @@ public class distribucionRandom: IPieceDistributer{
                 break;
                }
              }
+<<<<<<< HEAD
              foreach (var jug in juego.Jugadores)
                juego.manos[jug].Add(juego.fichasDelJuego.TomarUna());
             
+=======
+             foreach (var jug in juego.Jugadores){
+               juego.manos[jug].Add(juego.fichasDelJuego.TomarUna());
+            }
+>>>>>>> a5c8ef3634e4866c67e9015da09fd504cace0998
 		}
 }

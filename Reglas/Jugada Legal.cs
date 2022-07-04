@@ -11,8 +11,13 @@ public interface ILegalPlay
 
 public class RegularLegalPlay:ILegalPlay
 {
+<<<<<<< HEAD
     public virtual bool IsLegal(int[] disp, Piece ficha,int pos, int cara, bool nuevaMesa) =>
      nuevaMesa || disp[pos] == ficha.values[cara];
+=======
+    public virtual bool IsLegal(Table mesa, Piece ficha,int pos, int cara) =>
+     mesa.nuevaMesa || mesa[pos] == ficha.values[cara];
+>>>>>>> a5c8ef3634e4866c67e9015da09fd504cace0998
 } //Una jugada es valida si la cara por donde se juega es igual al valor de la posicion donde
   //se quiere jugar
 
