@@ -1,4 +1,5 @@
 using DominoGame;
+using DominoPlayer;
 using DominoTable;
 using System.Collections;
 using System.Linq;
@@ -12,63 +13,63 @@ public interface IWinner{
     public int Winner(Game juego);
 }
  class FinPorTranque: IEndCondition{
-  public bool EndOfTheGame(Game juego){
-        if(juego.cantFichasJugadorActual == 0|| juego.pasadosSeguidos >= juego.Jugadores.Length){
-            return true;
-        }
-        return false;
+  public bool EndOfTheGame(Game juego) =>
+  juego.cantFichasJugadorActual == 0|| juego.PasadosSeguidos >= juego.Jugadores.Length;
     }
-}
+
+  class Mesa150puntos: IEndCondition{
+    public bool EndOfTheGame(Game juego) => 
+    juego.Tablero.Historial().Select(jug => jug.Ficha).Sum(t => juego.reglas.Evaluador.Evaluar(t)) >= 150 ||
+     juego.cantFichasJugadorActual == 0 || juego.PasadosSeguidos >= juego.Jugadores.Length;
+  }
+  class DosPases:IEndCondition{
+     public bool EndOfTheGame(Game juego) =>
+     juego.cantFichasJugadorActual == 0|| juego.PasadosSeguidos == 2;
+  }
 
 class finalPorPuntos: IWinner{
     public int Winner(Game juego){
         if(juego.cantFichasJugadorActual == 0){
-        return juego.JugadorActual.equipo;}
+        return juego.JugadorActual.Equipo;}
         bool empate = true;
         int candidato = -1;
         double minimo = double.MaxValue;
-        /*for (int i = 0; i < juego.Jugadores.Length; i++)
+        foreach (var jug in juego.Jugadores)
         {
-              double total = 0;
-              var mano = juego.Jugadores[i].mostrarMano();
-              foreach (var ficha in mano){
-                  total += juego.reglas.evaluador.Evaluar(ficha);
-              }
-              if(total == minimo){
-                  empate = true;
-              } else if (total < minimo){
-                  minimo = total;
-                  candidato = juego.Jugadores[i].equipo;
-                  empate = false;
-              }
-        }*/
-         if(empate){
-            return -1;
-        }else return candidato;
-    }
+            double puntos = juego.manos[jug].Sum(t => juego.reglas.Evaluador.Evaluar(t));
+            if(puntos == minimo){
+                empate = true;
+            }
+            if(puntos < minimo){
+                minimo = puntos;
+                candidato = jug.Equipo;
+                empate = false;
+            }
+        }
+            return empate? -1: candidato;
+}
 }
 class finalPorCantidad: IWinner{
     public int Winner(Game juego){
         if(juego.cantFichasJugadorActual == 0) 
-        return juego.JugadorActual.equipo;
+        return juego.JugadorActual.Equipo;
         int minimo = int.MaxValue;
-        bool empate = false;
+        bool empate = true;
         int candidato = int.MaxValue;
-        /*for (int i= 0; i< juego.Jugadores.Length; i++){
-             if (juego.Jugadores[i].FichasLeQuedan == minimo){   
-                 empate = true;
+        foreach (var jug in juego.Jugadores)
+        {   
+            int FichasLeQuedan = juego.manos[jug].Count;
+            if(FichasLeQuedan == minimo){
+                empate = true;
                 continue;
             }
-            if (juego.Jugadores[i].FichasLeQuedan < minimo){
-                minimo = juego.Jugadores[i].FichasLeQuedan;
-                candidato = juego.Jugadores[i].equipo;
+            if(FichasLeQuedan < minimo){
+                minimo = FichasLeQuedan;
+                candidato = jug.Equipo;
                 empate = false;
             }
-        }*/
-        if(empate){
-            return -1;
         }
-        else return candidato;
+        return empate? -1 :candidato;
     }
 }
 }

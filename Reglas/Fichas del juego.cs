@@ -4,27 +4,20 @@ using System.Collections.Generic;
 namespace DominoRules{
 
 public class GamePieces{
-    List<Piece> Fichas;
+    List<Piece> _pieces;
+    Random _r = new();
 
-    public GamePieces(int cant){
-         Fichas = generador(cant);
+    public GamePieces(int cant, IGenerator generator){
+         _pieces = generator.Generate(cant);
     }
     public Piece TomarUna(){
-       Random r = new Random();
-       int fichaSeleccionada = r.Next(Fichas.Count - 1);
-       Piece devolver = Fichas[fichaSeleccionada];
-       Fichas.RemoveAt(fichaSeleccionada);
+      
+       int fichaSeleccionada = _r.Next((_pieces).Count);
+       Piece devolver = _pieces[fichaSeleccionada];
+       _pieces.RemoveAt(fichaSeleccionada);
        return devolver;
     }
-  public static List<Piece> generador(int Tope){
-        List<Piece> lista = new List<Piece>();
-        for (int i = 0; i <= Tope; i++){
-            for (int j = i; j <= Tope; j++){
-                lista.Add(new Piece(new int[]{i , j}));
-            }
-        }
-        return lista;
-    }
-    public int Length{ get{return Fichas.Count;}}
+  
+    public int Count => _pieces.Count;
 }
 }
