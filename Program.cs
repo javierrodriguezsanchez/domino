@@ -1,39 +1,11 @@
-﻿using System;
-using DominoGame;
-using DominoPlayer;
-using DominoRules;
-using DominoTable;
-using System.Text;
-Torney torneo = new Torney(new Player[]
-{
-    new Player("Juanito", new BotaMasRepetida(),1 ),
-    new Player("Fefito", new BotaMasRepetida(),2 ), 
-    new Player("Menganito", new estrategiaBotaGorda(),3), 
-    new Player("Esperancejo", new estrategiaBotaGorda(),4)
-}, new Rules(new FinPorTranque(), new SumEvaluator(), new Ciclomino(), new Escareromino(), new finalPorPuntos(), new TornPorPuntos(), new distribucionEquitativa(), new CrazyGenerator(), 9, 7));
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using DominoServer;
 
-Console.WriteLine("Ha comenzado el juego!!!!!!!!!! :D");
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
 
-foreach (var Game in torneo)
-{
-  foreach (var escena in torneo.JuegoActual){
-     Console.WriteLine("Manos:");
-      foreach (var jug in escena.manos.Keys)
-      {
-        Console.WriteLine("Jugador {0}: {1}", jug.Nombre, FichasAString(escena.manos[jug])); 
-      }
-      Console.WriteLine(FichasAString(escena.Tablero));
-   
-    }
-    Console.WriteLine("Nuevo juego");
-}
-    Console.WriteLine("Se acabo el torneo \n Ganador: Equipo {0}", torneo.Ganador);   
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-string FichasAString(IEnumerable<Piece> mano){
-    StringBuilder imprimir = new();
-    foreach (var item in mano)
-    {
-        imprimir.Append(item.ToString());
-    }
-    return imprimir.ToString();
-}
+await builder.Build().RunAsync();

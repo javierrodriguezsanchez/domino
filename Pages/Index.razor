@@ -1,0 +1,211 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<header>
+    <h1>Domino⬜⬛</h1>
+</header>
+<h1 id="Nombre">Opciones</h1>
+<form>
+    <div>
+        <div class="reglas">
+            <div>
+                <p>Tipo de domino</p> 
+                <select @bind-value="tipo" @bind-value:event="oninput">
+                    @for (int i = 4; i <= 9; i++)
+                    {
+                        <option value=@i>@(i)x@(i)</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <p>Numero de jugadores</p> 
+                <input type="number" min="2" max="4" @bind-value="@numero_de_jugadores" @bind-value:event="oninput" class="number">
+            </div>
+            <div>
+                    <p>Maxima cantidad inicial de fichas</p> 
+                    <input type="number" min="3" max="@MaximoInicial()" @bind-value="@CantidadInicial" @bind-value:event="oninput" class="number">
+            </div>
+        </div> 
+
+        <div id="jugadores">
+        @foreach(var jug in jugadores)
+        {
+        <label style="filter: blur(@(jug.numero>=numero_de_jugadores?5:0)px);">
+                <label style="border-style: none; margin:0px;padding:0px;">Nombre:
+                    <input type="text" @bind-value="jug.nombre" @bind-value:event="oninput" disabled="@(jug.numero>=numero_de_jugadores)" style="width:100px">
+                </label>
+                <label style="border-style: none; margin:0px;padding:0px;">
+                    Equipo:
+                    <input type="number" @bind-value="jug.equipo" disabled="@(jug.numero>=numero_de_jugadores)" min="1" max="@numero_de_jugadores" style="width:50px;">
+                </label>
+
+                <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=0" checked disabled="@(jug.numero>=numero_de_jugadores)">Borracho</label>
+                <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=1" value=1 disabled="@(jug.numero>=numero_de_jugadores)">BotaGorda</label>
+                <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=2" value=2 disabled="@(jug.numero>=numero_de_jugadores)">Agachado</label>
+        </label>
+        }
+        </div>
+
+        <div class="reglas">
+        <div style="border-style: none; padding:0px;">
+            <div>
+                <label>
+                    <p>Reglas de domino</p> 
+                    <select @bind-value="Juez" @bind-value:event="oninput">
+                        <option value=0>Domino Estandar</option>
+                        <option value=1>Escalerodomino</option>
+                        <option value=2>Piramidomino</option>
+                        <option value=3>Siempre se puede usar dobles</option>
+                    </select>
+                </label>
+            </div>
+            
+            <div>
+                <label>
+                    <p>Al no llevar:</p> 
+                    <select @bind-value="Turno" @bind-value:event="oninput">
+                        <option value=0>Se pasa</option>
+                        <option value=1>Toma una ficha</option>
+                        <option value=2>Coge fichas hasta llevar</option>
+                        <option value=3>Selecciona y coge una ficha</option>
+                    </select>
+                </label>
+            </div>
+            
+            <div>
+                <label>
+                    <p>Gana la partida el equipo:</p> 
+                    <select @bind-value="Ganador" @bind-value:event="oninput">
+                        <option value=0>Con el jugador de menor puntuacion</option>
+                        <option value=1>Con la menor suma de puntuaciones</option>
+                        <option value=2>Con la menor de las mayores puntuaciones del equipo</option>
+                    </select>
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <p>Tipo de torneo</p> 
+                    <select @bind-value="Torneo" @bind-value:event="oninput">
+                        <option value=0>Por puntos</option>
+                        <option value=1>Por victorias</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div style="border-style: none; padding:0px;">
+    
+            <div>
+                <label>
+                    <p>Valor de las fichas</p> 
+                    <select @bind-value="Evaluador" @bind-value:event="oninput">
+                        <option value=0>Suma de puntos</option>
+                        <option value=1>Dobles cuentan dobles</option>
+                        <option value=2>Multiplicacion de las caras</option>
+                        <option value=3>Norma asociada</option>
+                        <option value=4>Todas iguales</option>
+                        <option value=5>Cara Maxima</option>
+                    </select>
+                </label>
+            </div>
+            
+            <div>
+                <label>
+                    <p>Fin de juego</p> 
+                    <select @bind-value="Final" @bind-value:event="oninput">
+                        <option value=0>Estilo Tradicional</option>
+                        <option value=1>Dos pases seguidos</option>
+                        <option value=2>Superar puntos en mesa</option>
+                    </select>
+                </label>
+            </div>
+            
+            
+            <div>
+                <label>
+                    <p>Fichas:</p> 
+                    <select @bind-value="Generador" @bind-value:event="oninput">
+                        <option value=0>Sin repeticion</option>
+                        <option value=1>Con repeticion igual a la cantidad</option>
+                        <option value=2>Sin dobles</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <p>Cantidad Inicial</p> 
+                    <select @bind-value="Repartidor" @bind-value:event="oninput">
+                        <option value=0>Igual para todos</option>
+                        <option value=1>Menor o igual a la maxima</option>
+                    </select>
+                </label>
+            </div>
+            
+        </div>
+        </div>
+        
+        <NavLink href="Game" style="color: white; text-decoration: none;">
+            <button @onclick="Play" class="buttonindex">
+                <p style=" margin-bottom:0px;">¡JUGAR!</p>
+            </button>
+        </NavLink>
+    </div>
+</form>
+
+
+@code{
+    static int numero_de_jugadores=4;
+    static int CantidadInicial=3;
+    static int tipo=6;
+    public static int MaximoInicial()
+    {
+        return ((tipo+2)*(tipo+1)/2)/numero_de_jugadores;
+    }
+    class Jugador{
+    public int tipo_de_jugador;
+    public string nombre;
+    public int equipo;
+    public int numero;
+    public Jugador(string nombre, int equipo, int tipo, int num)
+    {
+        tipo_de_jugador=tipo;
+        this.nombre=nombre;
+        this.equipo=equipo;
+        numero=num;
+    }
+    };
+    Jugador[] jugadores=new Jugador[]
+    {
+        new Jugador("Shanks", 1,0,0),
+        new Jugador("Kaido", 2,0,1),
+        new Jugador("Shirohige", 3,0,2),
+        new Jugador("Big Mom", 4,0,3)
+    };
+
+    int Turno;
+    int Juez;
+    int Final;
+    int Torneo;
+    int Ganador;
+    int Repartidor;
+    int Generador;
+    int Evaluador;
+
+    void Play()
+    {
+        string[] nombres=new string[numero_de_jugadores];
+        int[] equipos=new int[numero_de_jugadores];
+        int[] tipos=new int[numero_de_jugadores];
+        for(int i=0;i<numero_de_jugadores;i++)
+        {
+            nombres[i]=jugadores[i].nombre;
+            equipos[i]=jugadores[i].equipo;
+            tipos[i]=jugadores[i].tipo_de_jugador;
+        }
+
+        Bridge.CrearTorneo(numero_de_jugadores,tipo,CantidadInicial,nombres,equipos,tipos,
+        Turno,Juez,Final,Torneo,Ganador,Repartidor,Generador,Evaluador);
+    }
+}
