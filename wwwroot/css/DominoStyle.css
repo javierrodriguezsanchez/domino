@@ -5,6 +5,11 @@ body{
     color:white;
 }
 
+.NavLink{
+    color: white;
+    text-decoration: none;
+}
+
 header{
     font-family:Georgia, 'Times New Roman', Times, serif;
     font-weight: bold;
@@ -76,17 +81,24 @@ header>h1{
 
 
 .corner{
-    width:100px; height:100px;
+    height:130px;
     font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top:5px;
 }
 
-#buttonPlay{
+.corner button{
     background-color: rgb(44, 44, 255);
     color:white;
     width: 100px;
     height: 100px;
     font-size: 60px;
-    padding: 0%;
+}
+
+.corner h3{
+    margin-top: 20px;
 }
 
 .fichaH{
@@ -95,16 +107,24 @@ header>h1{
     height: 50px;
     display: flex;
     margin-top: 5%;
-    padding: 0.8%;
+    padding: 4px;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.fichaH div{
+    flex: 1;
+    display: flex;
 }
 
 .fichaH>div{
-    margin: 5%;
-    flex: 1;
     background-color: white;
     color: black;
     font-size: 8px;
     flex-direction: column;
+    margin: 0px 1px;
+    justify-content: space-between;
+    text-align: center;
 }
 
 .fichaV{
@@ -113,17 +133,27 @@ header>h1{
     height: 100px;
     display: flex;
     flex-direction: column;
-    padding: 0.8%;
+    padding: 5px;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+
+.fichaV div{
+    flex: 1;
+    display: flex;
 }
 
 .fichaV>div{
-    margin: 5%;
-    flex: 1;
     background-color: white;
     color: black;
-    font-size: 8px;
-    display: inline;
+    font-size: 8px; 
+    flex-direction:column;
+    margin: 1px 0px;
+    justify-content: space-between;
+    text-align: center;
 }
+
 
 .columna{
     flex:1; 
@@ -134,15 +164,62 @@ header>h1{
 .columna >div{
     margin-bottom: 2%;
 }
+
+.ManoVertical{
+    height: 500px; 
+    overflow-y: scroll;
+    align-items: center;
+}
+
 .ManoHorizontal{
-    width: 800px;
+    width: 1100px;
     overflow-x: scroll;
     display: flex;
     justify-content: center;
+    height: 130px;
 }
 
 .ManoHorizontal div{
-    margin: 0.5%;
+    margin: 0.6%;
+}
+
+#mesa{
+    height: 520px;
+    align-items:stretch; 
+    display:flex; 
+    overflow-x:scroll; 
+    justify-content:center;
+}
+
+#mesa > div{
+    margin: 0%; 
+    padding: 0.2%;  
+    align-self:center;
+    margin: 0%;
+    padding: 0.2%;
+    align-self:center;
+}
+
+
+#salir{
+    position: absolute; 
+    top:33%; 
+    left:33%; 
+    border:solid white;
+}
+#salir h1{
+    text-align: center;
+    margin: 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+#salir div{
+    display: flex;
+}
+#salir button{
+    font-size:100px;
+    margin:40px; 
+    width: 160px;
+    color: white;
 }
 
 #resumen>div{
@@ -158,13 +235,31 @@ header>h1{
     border-radius: 20px;
     padding: 3%;
 }
-
 #resumen p{
     font-size: 50px;
     margin-right: 20px;
 }
 
+.Final{
+    display: flex;
+    margin:5%;
+    margin-bottom:0%;
+    align-items:center; 
+    justify-content: center;
+}
+.Final>div{
+    text-align:center;
+    flex:1;
+    align-items:center; 
+    justify-content: center;
+    margin-bottom: 1%;
+}
+.Final p{
+    font-size: 40px;
+}
+
 .JuegoTerminado{
+    font-family:Georgia, 'Times New Roman', Times, serif;
     text-align: center; 
     font-size:100px; 
     text-decoration:underline; 

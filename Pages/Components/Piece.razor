@@ -1,0 +1,60 @@
+<div class=@(horizontal?"fichaH":"fichaV")>
+    @foreach(var item2 in ficha.values)
+    {
+        <div>
+            @if (item2<=9 && item2>=0)
+            {    
+                <div>
+                    <div style="display:block;">@(horizontal?punto3(item2):punto1(item2))</div>
+                    <div style="display:block;">@(horizontal?punto4(item2):punto2(item2))</div>
+                    <div style="display:block;">@(horizontal?punto1(item2):punto3(item2))</div>
+                </div>
+                <div>
+                    <div style="display:block;">@(horizontal?punto2(item2):punto4(item2))</div>
+                    <div style="display:block;">@punto5(item2)</div>
+                    <div style="display:block;">@(horizontal?punto2(item2):punto4(item2))</div>
+                </div>
+                <div>
+                    <div style="display:block;">@(horizontal?punto1(item2):punto3(item2))</div>
+                    <div style="display:block;">@(horizontal?punto4(item2):punto2(item2))</div>
+                    <div style="display:block;">@(horizontal?punto3(item2):punto1(item2))</div>
+                </div>   
+            }
+            @if (item2>9 || item2<0)
+            {
+                <div  style="flex:1; justify-content:center;">
+                    <p style="font-size: 25px;">@item2</p>
+                </div>
+            }
+        </div>   
+    }
+</div>
+
+@code{
+    [Parameter]
+    public DominoTable.Piece ficha{get; set;}=new DominoTable.Piece();
+    [Parameter]
+    public bool horizontal{get;set;}=true;
+
+    string punto1(int numero)
+    {
+        return numero>=2?"⚫":" ";
+    }
+    string punto2(int numero)
+    {
+        return numero>=8?"⚫":" ";
+    }
+    string punto3(int numero)
+    {
+        return numero>=4?"⚫":" ";
+    }
+    string punto4(int numero)
+    {
+        return numero>=6?"⚫":" ";
+    }
+    string punto5(int numero)
+    {
+        return (numero%2==1)?"⚫":" ";
+    }
+
+}

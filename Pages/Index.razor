@@ -16,7 +16,12 @@
                     {
                         <option value=@i>@(i)x@(i)</option>
                     }
+                    <option value=10>otro</option>
                 </select>
+                @if (tipo==10)
+                {
+                    <input type="number" min=4 @bind-value="tipo2" @bind-value:event="oninput">
+                }
             </div>
             <div>
                 <p>Numero de jugadores</p> 
@@ -24,7 +29,7 @@
             </div>
             <div>
                     <p>Maxima cantidad inicial de fichas</p> 
-                    <input type="number" min="3" max="@MaximoInicial()" @bind-value="@CantidadInicial" @bind-value:event="oninput" class="number">
+                    <input type="number" min="3" max="@MaximoInicial(tipo==10?tipo2:tipo)" @bind-value="@CantidadInicial" @bind-value:event="oninput" class="number">
             </div>
         </div> 
 
@@ -63,12 +68,11 @@
             
             <div>
                 <label>
-                    <p>Al no llevar:</p> 
+                    <p>El jugador:</p> 
                     <select @bind-value="Turno" @bind-value:event="oninput">
-                        <option value=0>Se pasa</option>
-                        <option value=1>Toma una ficha</option>
-                        <option value=2>Coge fichas hasta llevar</option>
-                        <option value=3>Selecciona y coge una ficha</option>
+                        <option value=0>Solo pone una, y si no lleva se pasa</option>
+                        <option value=1>Solo pone una, y si no lleva toma una ficha</option>
+                        <option value=4>pone tantas sea posible, coge ficha de no llevar y cambia el sentido</option>
                     </select>
                 </label>
             </div>
@@ -129,7 +133,6 @@
                     <select @bind-value="Generador" @bind-value:event="oninput">
                         <option value=0>Sin repeticion</option>
                         <option value=1>Con repeticion igual a la cantidad</option>
-                        <option value=2>Sin dobles</option>
                     </select>
                 </label>
             </div>
@@ -146,7 +149,7 @@
         </div>
         </div>
         
-        <NavLink href="Game" style="color: white; text-decoration: none;">
+        <NavLink href="Game" class="NavLink">
             <button @onclick="Play" class="buttonindex">
                 <p style=" margin-bottom:0px;">¡JUGAR!</p>
             </button>
@@ -159,9 +162,10 @@
     static int numero_de_jugadores=4;
     static int CantidadInicial=3;
     static int tipo=6;
-    public static int MaximoInicial()
+    static int tipo2=10;
+    public static int MaximoInicial(int a)
     {
-        return ((tipo+2)*(tipo+1)/2)/numero_de_jugadores;
+        return ((a+2)*(a+1)/2)/numero_de_jugadores;
     }
     class Jugador{
     public int tipo_de_jugador;
@@ -178,10 +182,10 @@
     };
     Jugador[] jugadores=new Jugador[]
     {
-        new Jugador("Shanks", 1,0,0),
-        new Jugador("Kaido", 2,0,1),
-        new Jugador("Shirohige", 3,0,2),
-        new Jugador("Big Mom", 4,0,3)
+        new Jugador("Mewtwo", 1,0,0),
+        new Jugador("Pinsir", 2,0,1),
+        new Jugador("Lucario", 3,0,2),
+        new Jugador("Incineroar", 4,0,3)
     };
 
     int Turno;
@@ -205,7 +209,7 @@
             tipos[i]=jugadores[i].tipo_de_jugador;
         }
 
-        Bridge.CrearTorneo(numero_de_jugadores,tipo,CantidadInicial,nombres,equipos,tipos,
+        Bridge.CrearTorneo(numero_de_jugadores,tipo==10?tipo2:tipo,CantidadInicial,nombres,equipos,tipos,
         Turno,Juez,Final,Torneo,Ganador,Repartidor,Generador,Evaluador);
     }
 }

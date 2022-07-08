@@ -118,6 +118,16 @@ static public class Bridge
                 turno= new NormalTur();
                 break;
             }
+            case 1:
+            {
+                turno= new Robadito();
+                break;
+            }
+            case 4:
+            {
+                turno= new Ciclomino();
+                break;
+            }
             default:
             {
                 turno= new NormalTur();
@@ -165,6 +175,11 @@ static public class Bridge
                 ganador=new finalPorPuntos();
                 break;
             }
+            case 1:
+            {
+                ganador=new TeamPoints();
+                break;
+            }
             default:
             {
                 ganador=new finalPorPuntos();
@@ -191,14 +206,14 @@ static public class Bridge
         
         switch(deliver)
         {
-            case 0:
+            case 1:
             {
-                distributer=new distribucionEquitativa();
+                distributer=new distribucionRandom();
                 break;
             }
             default:
             {
-                distributer=new distribucionRandom();
+                distributer=new distribucionEquitativa();
                 break;
             }
         }
@@ -207,14 +222,14 @@ static public class Bridge
 
         switch(generator)
         {
-            case 0:
+            case 1:
             {
-                generador=new ClassicGenerator();
+                generador=new CrazyGenerator();
                 break;
             }
             default:
             {
-                generador=new CrazyGenerator();
+                generador=new ClassicGenerator();
                 break;
             }
         }

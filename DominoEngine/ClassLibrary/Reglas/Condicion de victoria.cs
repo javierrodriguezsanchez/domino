@@ -49,25 +49,32 @@ class finalPorPuntos: IWinner{
             return empate? -1: candidato;
 }
 }
-class finalPorCantidad: IWinner{
+class TeamPoints: IWinner{
     public int Winner(Game juego){
         if(juego.cantFichasJugadorActual == 0) 
-        return juego.JugadorActual.Equipo;
+            return juego.JugadorActual.Equipo;
         int minimo = int.MaxValue;
         bool empate = true;
-        int candidato = int.MaxValue;
-        foreach (var jug in juego.Jugadores)
-        {   
-            int FichasLeQuedan = juego.manos[jug].Count;
-            if(FichasLeQuedan == minimo){
-                empate = true;
-                continue;
+        Dictionary<int,double> teamScores = new Dictionary<int,double>();
+        int candidato=0;
+        foreach(var team in juego.equipos)
+        {
+            teamScores.Add(team.Key,0);
+            foreach (var jug in team.Value)
+            {
+                foreach(var ficha in juego.manos[jug])
+                    teamScores[team.Key]+=juego.reglas.Evaluador.Evaluar(ficha);
             }
-            if(FichasLeQuedan < minimo){
-                minimo = FichasLeQuedan;
-                candidato = jug.Equipo;
-                empate = false;
+        }
+        foreach(var team in teamScores)
+        {
+            if(team.Value<minimo)
+            {
+                candidato=team.Key;
+                empate=false;
             }
+            if(team.Value==minimo)
+                empate=true;
         }
         return empate? -1 :candidato;
     }

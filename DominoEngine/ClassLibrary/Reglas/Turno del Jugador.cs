@@ -19,17 +19,27 @@ public class NormalTur:ITurn
                 Juego.Tablero.pasarse(Jugador);
                 return;
         }
-        if(Juego.Tablero.nuevaMesa){
-            Juego.Tablero.abrirMesa(AJugar.ficha, Jugador);
-            Juego.manos[Jugador].Remove(AJugar.ficha);
-            return;
-        }
-        if(Juego.reglas.JugadaLegal.IsLegal(Juego.Tablero.Disponibles.ToArray(),AJugar.Item1,AJugar.Item2,AJugar.Item3, Juego.Tablero.nuevaMesa)){
-            Juego.Tablero.JugarEnPos(AJugar.ficha, Jugador, AJugar.cara, AJugar.posicion);
-            Juego.PasadosSeguidos = 0;
-            Juego.manos[Jugador].Remove(AJugar.ficha);
-        }
+        MetodosAux.PonerFicha(Juego,AJugar,Jugador);
     }
+}
+
+public class Robadito:ITurn{
+    public void Play(Player Jugador, Game Juego)
+    {
+        (Piece ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),  Juego.reglas, Juego.Tablero.nuevaMesa);
+        
+        if(AJugar.Item1.IsNull){
+                Juego.Tablero.pasarse(Jugador);
+                if(Juego.fichasDelJuego.Count>0)
+                    Juego.manos[Jugador].Add(Juego.fichasDelJuego.TomarUna());
+                else
+                    Juego.PasadosSeguidos ++;
+                return;
+        }
+        
+        MetodosAux.PonerFicha(Juego,AJugar,Jugador);
+    }
+
 }
 public class Ciclomino: ITurn{
     public void Play(Player Jugador, Game Juego)
@@ -71,6 +81,20 @@ class MetodosAux{
            }
         }
         aux.CopyTo(array, 0);
+   }
+   public static void PonerFicha(Game Juego, (Piece ficha, int posicion,int cara) AJugar,Player Jugador)
+   {
+        if(Juego.Tablero.nuevaMesa){
+            Juego.Tablero.abrirMesa(AJugar.ficha, Jugador);
+            Juego.manos[Jugador].Remove(AJugar.ficha);
+            return;
+        }
+        if(Juego.reglas.JugadaLegal.IsLegal(Juego.Tablero.Disponibles.ToArray(),AJugar.Item1,AJugar.Item2,AJugar.Item3, Juego.Tablero.nuevaMesa)){
+            Juego.Tablero.JugarEnPos(AJugar.ficha, Jugador, AJugar.cara, AJugar.posicion);
+            Juego.PasadosSeguidos = 0;
+            Juego.manos[Jugador].Remove(AJugar.ficha);
+        }
+
    }
 }
 }

@@ -1,3 +1,4 @@
+@using DominoServer.Pages.Components
 @page "/Game"
 
 <PageTitle>Game</PageTitle>
@@ -9,190 +10,110 @@
         <h1>Ha ocurrido algun error</h1>
         <h2>Haga click en el boton para regresar atras</h2>
         <button>
-            <NavLink href="" style="color: white; text-decoration: none;"><p style=" margin-bottom:0px;">Volver</p></NavLink>
+            <NavLink  class="NavLink" href=""><p style=" margin-bottom:0px;">Volver</p></NavLink>
         </button>
     </div>
 }
 
 @if(salir)
 {
-    <div style="position: absolute; top:35%; left:35%; border:solid white;">
-        <h1 style="text-align: center;">¿Desea abandonar?</h1>
-        <div style="display: flex;">
-            <button style="background-color: rgb(50,255,150); font-size:100px;margin:40px; width 100px">
-                <NavLink href="" style="color: white; text-decoration: none;">Si</NavLink>
-            </button>
-            <button style="background-color: red; color: white; font-size:100px; margin:40px; width=100px" @onclick="Salida">No</button>
+    <div id="salir">
+        <h1>¿Desea abandonar?</h1>
+        <div>
+            <NavLink  class="NavLink" href="">
+                <button style="background-color: rgb(27, 177, 42);">
+                    Si
+                </button>
+            </NavLink>
+            <button style="background-color: rgb(216, 2, 2);" @onclick="Salida">No</button>
         </div>
     </div>
 }
 
 @if(EndOfTheRound && !EndOfTheTorney)
 {
-<h1 class="JuegoTerminado">Ronda Terminada</h1>
-<div id="resumen">
-<div>    
-    <div>
-        <p>@(Bridge.jugadores[0].Nombre):</p>
-        @if(mano1.Length==0)
-        {
-            <p>Se pego</p>
-        }
-        @foreach (var item in mano1)
-        {   
-            <div class="fichaV">
-            @foreach(var item2 in item.values)
-            {
-                <div style="display: flex; flex-direction:column;margin-bottom: 5%; margin-top:5%">
-                    <div style="display: flex; flex: 1;">
-                        <div style="flex: 1;">@punto1(item2)</div>
-                        <div style="flex: 1;">@punto2(item2)</div>
-                        <div style="flex: 1;">@punto3(item2)</div>
-                    </div>
-                    <div style="display: flex; flex: 1;">
-                        <div style="flex: 1;">@punto4(item2)</div>
-                        <div style="flex: 1;">@punto5(item2)</div>
-                        <div style="flex: 1;">@punto4(item2)</div>
-                    </div>
-                    <div style="display: flex; flex: 1;">
-                        <div style="flex: 1;">@punto3(item2)</div>
-                        <div style="flex: 1;">@punto2(item2)</div>
-                        <div style="flex: 1;">@punto1(item2)</div>
-                    </div>
-                </div>   
-            }
-            </div>
-        }
-    </div>
-    
-    <div>
-        <p>@(Bridge.jugadores[1].Nombre):</p>
-        @if(mano2.Length==0)
-        {
-            <p>Se pego</p>
-        }
-        @foreach (var item in mano2)
-        {   
-            <div class="fichaV">
-            @foreach(var item2 in item.values)
-            {
-                <div style="display: flex; flex-direction:column;margin-bottom: 5%; margin-top:5%">
-                    <div style="display: flex; flex: 1;">
-                        <div style="flex: 1;">@punto1(item2)</div>
-                        <div style="flex: 1;">@punto2(item2)</div>
-                        <div style="flex: 1;">@punto3(item2)</div>
-                    </div>
-                    <div style="display: flex; flex: 1;">
-                        <div style="flex: 1;">@punto4(item2)</div>
-                        <div style="flex: 1;">@punto5(item2)</div>
-                        <div style="flex: 1;">@punto4(item2)</div>
-                    </div>
-                    <div style="display: flex; flex: 1;">
-                        <div style="flex: 1;">@punto3(item2)</div>
-                        <div style="flex: 1;">@punto2(item2)</div>
-                        <div style="flex: 1;">@punto1(item2)</div>
-                    </div>
-                </div>   
-            }
-            </div>
-        }
-    </div>
-</div>
-    @if(Bridge.jugadores.Length>=3)
-    { 
-        <div>       
-        <div>
-            <p>@(Bridge.jugadores[2].Nombre):</p>
-            @if(mano3.Length==0)
-            {
-                <p>Se pego</p>
-            }
-            @foreach (var item in mano3)
-            {   
-                <div class="fichaV">
-                @foreach(var item2 in item.values)
-                {
-                    <div style="display: flex; flex-direction:column;margin-bottom: 5%; margin-top:5%">
-                        <div style="display: flex; flex: 1;">
-                            <div style="flex: 1;">@punto1(item2)</div>
-                            <div style="flex: 1;">@punto2(item2)</div>
-                            <div style="flex: 1;">@punto3(item2)</div>
-                        </div>
-                        <div style="display: flex; flex: 1;">
-                            <div style="flex: 1;">@punto4(item2)</div>
-                            <div style="flex: 1;">@punto5(item2)</div>
-                            <div style="flex: 1;">@punto4(item2)</div>
-                        </div>
-                        <div style="display: flex; flex: 1;">
-                            <div style="flex: 1;">@punto3(item2)</div>
-                            <div style="flex: 1;">@punto2(item2)</div>
-                            <div style="flex: 1;">@punto1(item2)</div>
-                        </div>
-                    </div>   
-                }
-                </div>
-            }
-        </div>
-
-        @if(Bridge.jugadores.Length>=4)
-        {
-            <div style="display: flex;">
-                <p>@(Bridge.jugadores[3].Nombre):</p>
-                @if(mano4.Length==0)
+    <h1 class="JuegoTerminado">Ronda Terminada</h1>
+    <div id="resumen">
+        <div>    
+            <div>
+                <p>@(Bridge.jugadores[0].Nombre):</p>
+                @if(mano1.Length==0)
                 {
                     <p>Se pego</p>
                 }
-                @foreach (var item in mano4)
+                @foreach (var item in mano1)
                 {   
-                    <div class="fichaV">
-                    @foreach(var item2 in item.values)
-                    {
-                        <div style="display: flex; flex-direction:column;margin-bottom: 5%; margin-top:5%">
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto1(item2)</div>
-                                <div style="flex: 1;">@punto2(item2)</div>
-                                <div style="flex: 1;">@punto3(item2)</div>
-                            </div>
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto4(item2)</div>
-                                <div style="flex: 1;">@punto5(item2)</div>
-                                <div style="flex: 1;">@punto4(item2)</div>
-                            </div>
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto3(item2)</div>
-                                <div style="flex: 1;">@punto2(item2)</div>
-                                <div style="flex: 1;">@punto1(item2)</div>
-                            </div>
-                        </div>   
-                    }
-                    </div>
+                    <Piece horizontal=false ficha=item></Piece>
                 }
             </div>
-        }
+            
+            <div>
+                <p>@(Bridge.jugadores[1].Nombre):</p>
+                @if(mano2.Length==0)
+                {
+                    <p>Se pego</p>
+                }
+                @foreach (var item in mano2)
+                {   
+                    <Piece horizontal=false ficha=item></Piece>    
+                }
+            </div>
+    </div>
+
+    @if(Bridge.jugadores.Length>=3)
+    { 
+        <div>       
+            <div>
+                <p>@(Bridge.jugadores[2].Nombre):</p>
+                @if(mano3.Length==0)
+                {
+                    <p>Se pego</p>
+                }
+                @foreach (var item in mano3)
+                {   
+                    <Piece horizontal=false ficha=item></Piece>
+                }
+            </div>
+
+            @if(Bridge.jugadores.Length>=4)
+            {
+                <div style="display: flex;">
+                    <p>@(Bridge.jugadores[3].Nombre):</p>
+                    @if(mano4.Length==0)
+                    {
+                        <p>Se pego</p>
+                    }
+                    @foreach (var item in mano4)
+                    {   
+                        <Piece horizontal=false ficha=item></Piece>
+                    }
+                </div>
+            }
         </div>
     }
+
     </div>
 
     <div style="display: flex;align-items:center;">
-    <div style="border:solid; width:50% ;margin-top:3%;margin-bottom:3%; border-radius:20px;">
-    <p class="JuegoTerminado" style="font-size:60px; margin:1%">Puntuaciones</p>
-        @foreach(var item in Bridge.torneo!.Scores)
-        {
-            <p class="JuegoTerminado" style="font-size:30px; text-decoration:none;margin:0.5%">Equipo# @(item.Key): @item.Value</p> 
-        }
-    </div>
-    
-    <div id="aaa">
-        <button @onclick="NextRound" class="buttonindex">
-            Proximo Juego
-        </button>
+        <div style="border:solid; width:50% ;margin-top:3%;margin-bottom:3%; border-radius:20px;">
+            <p class="JuegoTerminado" style="font-size:60px; margin:1%">Puntuaciones</p>
+                @foreach(var item in Bridge.torneo!.Scores)
+                {
+                    <p class="JuegoTerminado" style="font-size:30px; text-decoration:none;margin:0.5%">Equipo# @(item.Key): @item.Value</p> 
+                }
+        </div>
             
-        <NavLink href="" style="color: white; text-decoration: none;">
-            <button class="buttonindex">
-                <p style=" margin-bottom:0px;">Salir del Juego</p>
+        <div id="aaa">
+            <button @onclick="NextRound" class="buttonindex">
+                Proximo Juego
             </button>
-        </NavLink>
-    </div>
+                        
+            <NavLink  class="NavLink" href="">
+                <button class="buttonindex">
+                    <p style=" margin-bottom:0px;">Salir del Juego</p>
+                </button>
+            </NavLink>
+        </div>
     </div>
 }
 
@@ -200,8 +121,8 @@
 {
     <h1 class="JuegoTerminado"> Ganador: </h1>
     
-    <div style="display: flex;font-size:60px; margin:1%;align-items:center">
-        <div style="text-align:center;flex:1;">
+    <div class="Final">
+        <div>
             <p>Equipo #@Bridge.torneo!.Ganador</p>
             @foreach (var item in Bridge.jugadores)
             {
@@ -209,23 +130,23 @@
                 {<p>@item.Nombre</p>}        
             }
         </div>
-        <div style="text-align:center;flex:1;">
+        <div>
             <p>Puntuacion:</p> 
-            @Bridge.torneo.Scores[Bridge.torneo.Ganador]
+            <p>@Bridge.torneo.Scores[Bridge.torneo.Ganador]</p>
         </div>
     </div>
 
-    <div style="display: flex; margin:5%; margin-bottom:0%; align-items:center; justify-content: center;">
-        <div style="flex:1; align-items:center; justify-content: center;">
-            <NavLink href="Game" style="color: white; text-decoration: none;">
-                <button @onclick="Reset" class="buttonindex">
+    <div class="Final">
+        <div>
+            <NavLink  class="NavLink" href="Game">
+                <button @onclick="OnInitialized" class="buttonindex">
                     <p style=" margin-bottom:0px;">Jugar de nuevo</p>
                 </button>
             </NavLink>
         </div>
-        <div style="flex:1; align-items:center; justify-content: center;">
-            <NavLink href="" style="color: white; text-decoration: none; widht:200px">
-                <button class="buttonindex">
+        <div>
+            <NavLink  class="NavLink" href="">
+                <button class="buttonindex"  style="width:200px">
                     <p style=" margin-bottom:0px;">Volver a menu principal</p>
                 </button>
             </NavLink>
@@ -236,187 +157,83 @@
 
 @if (TodoCorrecto && !EndOfTheRound)
 {
-<div style="display:flex;">
-    
-    <div class="columna">
-        <div class="corner">
-            <button @onclick="NextPlay" id="buttonPlay" disabled="@salir">
-                ▶
-            </button>
-        </div>
-        <div style="height: 500px; overflow-y: scroll;">
-            <h1>@(Bridge.jugadores[1].Nombre)</h1>
-            @foreach (var item in mano2)
-            {
-                <div class="fichaH">
-                    @foreach (var item2 in item.values)
-                    {    
-                        <div style="display: flex; flex-direction:column;">
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto1(item2)</div>
-                                <div style="flex: 1;">@punto4(item2)</div>
-                                <div style="flex: 1;">@punto3(item2)</div>
-                            </div>
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto2(item2)</div>
-                                <div style="flex: 1;">@punto5(item2)</div>
-                                <div style="flex: 1;">@punto2(item2)</div>
-                            </div>
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto3(item2)</div>
-                                <div style="flex: 1;">@punto4(item2)</div>
-                                <div style="flex: 1;">@punto1(item2)</div>
-                            </div>
-                        </div>   
-                    }
-                </div>
-            }
-        </div>
-        <div class="corner">
-            @foreach(var item in Bridge.torneo!.Scores)
-            {
-                <p>Equipo# @(item.Key): @item.Value</p> 
-            }
-        </div>
-    </div>
-
-    <div style="flex-direction:column; width:1100px;">
-        <div class="ManoHorizontal">
-            <h1>@(Bridge.jugadores[0].Nombre)</h1>
-            @foreach (var item in mano1)
-            {
-                <div class="fichaV">
-                    @foreach(var item2 in item.values)
-                    {
-                        <div style="display: flex; flex-direction:column;margin-bottom: 5%; margin-top:5%">
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto1(item2)</div>
-                                <div style="flex: 1;">@punto2(item2)</div>
-                                <div style="flex: 1;">@punto3(item2)</div>
-                            </div>
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto4(item2)</div>
-                                <div style="flex: 1;">@punto5(item2)</div>
-                                <div style="flex: 1;">@punto4(item2)</div>
-                            </div>
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto3(item2)</div>
-                                <div style="flex: 1;">@punto2(item2)</div>
-                                <div style="flex: 1;">@punto1(item2)</div>
-                            </div>
-                        </div>   
-                    }
-                </div>
-            }
+    <div style="display:flex;">
+        
+        <div class="columna">
+            <div class="corner">
+                <button @onclick="NextPlay" disabled="@salir">
+                    ▶
+                </button>
+            </div>
+            <div class="ManoVertical">
+                <h1>@(Bridge.jugadores[1].Nombre)</h1>
+                @foreach (var item in mano2)
+                {
+                    <Piece horizontal ficha=item></Piece>
+                }
+            </div>
+            <div class="corner">
+                @foreach(var item in Bridge.torneo!.Scores)
+                {
+                    <p>Equipo# @(item.Key): @item.Value</p> 
+                }
+            </div>
         </div>
 
-        <div style="height: 500px;align-items:stretch; display:flex; overflow-x:scroll; justify-content:center;">
-            @foreach (var item in mesa)
-            {
-                <div style="margin: 0%; padding: 0.1%;  align-self:center; heigth: 500px;">
-                    <div class=@(esdoble(item.values)?"fichaV":"fichaH")>
-                        @foreach (var item2 in item.values)
-                        {    
-                            <div style="display: flex; flex-direction:column;">
-                                <div style="display: flex; flex: 1;">
-                                    <div style="flex: 1;">@punto1(item2)</div>
-                                    <div style="flex: 1;">@(esdoble(item.values)?punto2(item2):punto4(item2))</div>
-                                    <div style="flex: 1;">@punto3(item2)</div>
-                                </div>
-                                <div style="display: flex; flex: 1;">
-                                    <div style="flex: 1;">@(esdoble(item.values)?punto4(item2):punto2(item2))</div>
-                                    <div style="flex: 1;">@punto5(item2)</div>
-                                    <div style="flex: 1;">@(esdoble(item.values)?punto4(item2):punto2(item2))</div>
-                                </div>
-                                <div style="display: flex; flex: 1;">
-                                    <div style="flex: 1;">@punto3(item2)</div>
-                                    <div style="flex: 1;">@(esdoble(item.values)?punto2(item2):punto4(item2))</div>
-                                    <div style="flex: 1;">@punto1(item2)</div>
-                                </div>
-                            </div>   
-                        }
+        <div style="flex-direction:column; width:1100px;">
+            <div class="ManoHorizontal">
+                <h1>@(Bridge.jugadores[0].Nombre)</h1>
+                @foreach (var item in mano1)
+                {
+                    <Piece horizontal=false ficha=item></Piece>                    
+                }
+            </div>
+
+            <div id="mesa" style=@displaymesa()>
+                @foreach (var item in mesa)
+                {
+                    <div>
+                        <Piece ficha=item horizontal=@(!esdoble(item.values))></Piece>
                     </div>
-                </div>
-            }
-        </div>
-        @if(Bridge.jugadores.Length>=3)
-        {
-        <div class="ManoHorizontal">
-            <h1>@(Bridge.jugadores[2].Nombre)</h1>
-            @foreach (var item in mano3)
+                }
+            </div>
+            @if(Bridge.jugadores.Length>=3)
             {
-                <div class="fichaV">
-                    @foreach (var item2 in item.values)
-                    {    
-                        <div style="display: flex; flex-direction:column;margin-bottom: 5%; margin-top:5%">
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto1(item2)</div>
-                                <div style="flex: 1;">@punto2(item2)</div>
-                                <div style="flex: 1;">@punto3(item2)</div>
-                            </div>
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto4(item2)</div>
-                                <div style="flex: 1;">@punto5(item2)</div>
-                                <div style="flex: 1;">@punto4(item2)</div>
-                            </div>
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto3(item2)</div>
-                                <div style="flex: 1;">@punto2(item2)</div>
-                                <div style="flex: 1;">@punto1(item2)</div>
-                            </div>
-                        </div>   
-                    }
-                </div>
+            <div class="ManoHorizontal">
+                <h1>@(Bridge.jugadores[2].Nombre)</h1>
+                @foreach (var item in mano3)
+                {
+                    <Piece horizontal=false ficha=item></Piece>
+                }
+            </div>
             }
         </div>
-        }
-    </div>
 
-    <div class="columna">
-        <div style="width:100px; height:100px;">
-            <button style="font-size: 50px; background-color:rgb(44, 44, 255); padding:0%" class="corner" @onclick="Salida">
-                <p style="color:white; margin-bottom:0px;">↩</p>
-            </button>
-        </div>
-        @if(Bridge.jugadores.Length>=4)
-        {
-        <div style="height: 500px; overflow-y: scroll;">
-            
-            <h1>@(Bridge.jugadores[3].Nombre)</h1>
-            @foreach (var item in mano4)
+        <div class="columna">
+            <div class="corner">
+                <button @onclick="Salida">
+                    <p>↩</p>
+                </button>
+            </div>
+            @if(Bridge.jugadores.Length>=4)
             {
-                <div class="fichaH">
-                    @foreach (var item2 in item.values)
-                    {    <div style="display: flex; flex-direction:column;">
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto1(item2)</div>
-                                <div style="flex: 1;">@punto4(item2)</div>
-                                <div style="flex: 1;">@punto3(item2)</div>
-                            </div>
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto2(item2)</div>
-                                <div style="flex: 1;">@punto5(item2)</div>
-                                <div style="flex: 1;">@punto2(item2)</div>
-                            </div>
-                            <div style="display: flex; flex: 1;">
-                                <div style="flex: 1;">@punto3(item2)</div>
-                                <div style="flex: 1;">@punto4(item2)</div>
-                                <div style="flex: 1;">@punto1(item2)</div>
-                            </div>
-                        </div>   
-                    }
-                </div>
+            <div class="ManoVertical">
+                
+                <h1>@(Bridge.jugadores[3].Nombre)</h1>
+                @foreach (var item in mano4)
+                {
+                    <Piece ficha=item horizontal></Piece>
+                }
+            </div>
             }
+
+        <div class="corner">
+            <h3>Jugador Actual</h3>
+            <p style="font-size: 25px; text-align: center;">@Bridge.escenas.Current.JugadorUltimaJugada.Nombre</p>
         </div>
-        }
+        </div>
 
-    <div>
-        <h3>Jugador Actual</h3>
-        <p style="font-size: 25px; text-align: center;">@Bridge.escenas.Current.JugadorUltimaJugada.Nombre</p>
     </div>
-    </div>
-
-</div>
 }
 
 @code{
@@ -467,33 +284,13 @@
         }
     }
 
-    string punto1(int numero)
-    {
-        return numero>=2?"⚫":" ";
-    }
-    string punto2(int numero)
-    {
-        return numero>=8?"⚫":" ";
-    }
-    string punto3(int numero)
-    {
-        return numero>=4?"⚫":" ";
-    }
-    string punto4(int numero)
-    {
-        return numero>=6?"⚫":" ";
-    }
-    string punto5(int numero)
-    {
-        return (numero%2==1)?"⚫":" ";
-    }
-
     bool esdoble(int[] ficha)
     {
         return ficha[0]==ficha[1];
     }
 
-    void Reset(){
+    protected override void OnInitialized()
+    {
         Bridge.torneo=new DominoGame.Torney(Bridge.jugadores,Bridge.reglas);
         Bridge.juegos=Bridge.torneo.GetEnumerator();
         if(Bridge.juegos.MoveNext())
@@ -505,11 +302,18 @@
         mano1=Bridge.escenas.Current.manos[Bridge.jugadores[0]].ToArray();
         mano2=Bridge.escenas.Current.manos[Bridge.jugadores[1]].ToArray();
         mano3=Bridge.jugadores.Length>=3?Bridge.escenas.Current.manos[Bridge.jugadores[2]].ToArray():null!;
-        mano4=Bridge.jugadores.Length>=3?Bridge.escenas.Current.manos[Bridge.jugadores[2]].ToArray():null!;
+        mano4=Bridge.jugadores.Length>=3?Bridge.escenas.Current.manos[Bridge.jugadores[3]].ToArray():null!;
         mesa=Bridge.escenas.Current.Tablero.ToArray();
         TodoCorrecto=true;
         EndOfTheTorney=false;
         EndOfTheRound=false;
         salir=false;
     }
+
+    string displaymesa()
+    {
+        if(mesa.Length>10)return "justify-content:flex-start;";
+        return "";
+    }
 }
+
