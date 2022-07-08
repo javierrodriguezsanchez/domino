@@ -1,20 +1,21 @@
 using System;
 
 namespace DominoRules{
-public class Rules{
+public class Rules<T>{
+
    public int Cantidad_Inicial_En_La_Mano{get; private set;}
    //holds how many pieces initialy have every player at the start of the game
    
    public readonly int Tope;
-   public readonly IEndCondition Final;
-   public readonly IPieceEvaluator Evaluador;
-   public readonly ITurn Turno;
-   public readonly ILegalPlay JugadaLegal;
-   public readonly IWinner Ganador;
-   public readonly ITorn TipoDeTorneo;
-   public readonly IPieceDistributer Repartidor;
-   public readonly IGenerator Generator;
-   public Rules(IEndCondition final, IPieceEvaluator evaluador, ITurn turn, ILegalPlay validador, IWinner ganador, ITorn tipoTorn, IPieceDistributer repartidor, IGenerator generator, int tope, int cantInicialMano)   //Feisima esta clase, pero weno, no la voa tocar por ahora.
+   public readonly IEndCondition<T> Final;
+   public readonly IPieceEvaluator<T> Evaluador;
+   public readonly ITurn<T> Turno;
+   public readonly ILegalPlay<T> JugadaLegal;
+   public readonly IWinner<T> Ganador;
+   public readonly ITorn<T> TipoDeTorneo;
+   public readonly IPieceDistributer<T> Repartidor;
+   public readonly IGenerator<T> Generator;
+   public Rules(IEndCondition<T> final, IPieceEvaluator<T> evaluador, ITurn<T> turn, ILegalPlay<T> validador, IWinner<T> ganador, ITorn<T> tipoTorn, IPieceDistributer<T> repartidor, IGenerator<T> generator, int tope, int cantInicialMano)   //Feisima esta clase, pero weno, no la voa tocar por ahora.
    {
       Tope = tope;
       Cantidad_Inicial_En_La_Mano = cantInicialMano;

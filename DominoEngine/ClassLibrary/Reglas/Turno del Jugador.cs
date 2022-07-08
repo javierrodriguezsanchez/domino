@@ -1,18 +1,18 @@
 using DominoTable;
 using DominoPlayer;
 using DominoGame;
-namespace DominoRules
+namespace DominoRules;
+
+public interface ITurn<T>
 {
-public interface ITurn
-{
-    public void Play(Player Jugador, Game Juego);
+    public void Play(Player<T> Jugador, Game<T> Juego);
 }
 
-public class NormalTur:ITurn
+public class NormalTur<T>:ITurn<T>
 {
-    public void Play(Player Jugador, Game Juego)
+    public void Play(Player<T> Jugador, Game<T> Juego)
     {
-        (Piece ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),  Juego.reglas, Juego.Tablero.nuevaMesa);
+        (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),  Juego.reglas, Juego.Tablero.nuevaMesa);
         
         if(AJugar.Item1.IsNull){
                 Juego.PasadosSeguidos ++;
@@ -23,10 +23,10 @@ public class NormalTur:ITurn
     }
 }
 
-public class Robadito:ITurn{
-    public void Play(Player Jugador, Game Juego)
+public class Robadito<T>:ITurn<T>{
+    public void Play(Player<T> Jugador, Game<T> Juego)
     {
-        (Piece ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),  Juego.reglas, Juego.Tablero.nuevaMesa);
+        (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),  Juego.reglas, Juego.Tablero.nuevaMesa);
         
         if(AJugar.Item1.IsNull){
                 Juego.Tablero.pasarse(Jugador);
@@ -34,18 +34,19 @@ public class Robadito:ITurn{
                     Juego.manos[Jugador].Add(Juego.fichasDelJuego.TomarUna());
                 else
                     Juego.PasadosSeguidos ++;
-                return;
+            return;
         }
         
-        MetodosAux.PonerFicha(Juego,AJugar,Jugador);
+        MetodosAux.PonerFicha<T>(Juego,AJugar,Jugador);
     }
 
 }
-public class Ciclomino: ITurn{
-    public void Play(Player Jugador, Game Juego)
+
+public class Ciclomino<T>: ITurn<T>{
+    public void Play(Player<T> Jugador, Game<T> Juego)
     {   
         if(Juego.manos[Jugador].Count == 0) return; 
-        (Piece ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),  Juego.reglas, Juego.Tablero.nuevaMesa);
+        (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),  Juego.reglas, Juego.Tablero.nuevaMesa);
         
         if(AJugar.Item1.IsNull){
                 Juego.PasadosSeguidos ++;
@@ -82,7 +83,7 @@ class MetodosAux{
         }
         aux.CopyTo(array, 0);
    }
-   public static void PonerFicha(Game Juego, (Piece ficha, int posicion,int cara) AJugar,Player Jugador)
+   public static void PonerFicha<T>(Game<T> Juego, (Piece<T> ficha, int posicion,int cara) AJugar,Player<T> Jugador)
    {
         if(Juego.Tablero.nuevaMesa){
             Juego.Tablero.abrirMesa(AJugar.ficha, Jugador);
@@ -96,5 +97,4 @@ class MetodosAux{
         }
 
    }
-}
 }

@@ -3,16 +3,16 @@ using System;
 namespace DominoTable
 {
 
- public class Piece
+ public class Piece<T>
 {
-    public int[] values{get; private set;}
+    public T[] values{get; private set;}
     public bool IsNull{get; private set;}
     public Piece()
     {
-        values=new int[0];
+        values=new T[0];
         IsNull=true;
     }
-    public Piece(int[] values)
+    public Piece(T[] values)
     {
         this.values=values;
         IsNull=false;

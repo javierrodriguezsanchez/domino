@@ -6,29 +6,29 @@ using System.Linq;
 using System;
 namespace DominoRules
 {
-public interface  IEndCondition{
-   public bool EndOfTheGame(Game juego);
+public interface  IEndCondition<T>{
+   public bool EndOfTheGame(Game<T> juego);
 }
-public interface IWinner{
-    public int Winner(Game juego);
+public interface IWinner<T>{
+    public int Winner(Game<T> juego);
 }
- class FinPorTranque: IEndCondition{
-  public bool EndOfTheGame(Game juego) =>
+ class FinPorTranque<T>: IEndCondition<T>{
+  public bool EndOfTheGame(Game<T> juego) =>
   juego.cantFichasJugadorActual == 0|| juego.PasadosSeguidos >= juego.Jugadores.Length;
     }
 
-  class Mesa150puntos: IEndCondition{
-    public bool EndOfTheGame(Game juego) => 
+  class Mesa150puntos<T>: IEndCondition<T>{
+    public bool EndOfTheGame(Game<T> juego) => 
     juego.Tablero.Historial().Select(jug => jug.Ficha).Sum(t => juego.reglas.Evaluador.Evaluar(t)) >= 150 ||
      juego.cantFichasJugadorActual == 0 || juego.PasadosSeguidos >= juego.Jugadores.Length;
   }
-  class DosPases:IEndCondition{
-     public bool EndOfTheGame(Game juego) =>
+  class DosPases<T>:IEndCondition<T>{
+     public bool EndOfTheGame(Game<T> juego) =>
      juego.cantFichasJugadorActual == 0|| juego.PasadosSeguidos == 2;
   }
 
-class finalPorPuntos: IWinner{
-    public int Winner(Game juego){
+class finalPorPuntos<T>: IWinner<T>{
+    public int Winner(Game<T> juego){
         if(juego.cantFichasJugadorActual == 0){
         return juego.JugadorActual.Equipo;}
         bool empate = true;
@@ -49,8 +49,8 @@ class finalPorPuntos: IWinner{
             return empate? -1: candidato;
 }
 }
-class TeamPoints: IWinner{
-    public int Winner(Game juego){
+class TeamPoints<T>: IWinner<T>{
+    public int Winner(Game<T> juego){
         if(juego.cantFichasJugadorActual == 0) 
             return juego.JugadorActual.Equipo;
         int minimo = int.MaxValue;

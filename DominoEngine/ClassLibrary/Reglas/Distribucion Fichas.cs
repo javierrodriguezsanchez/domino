@@ -1,10 +1,10 @@
 namespace DominoRules;
 
-public interface IPieceDistributer{
-    void distribuir(DominoGame.Game juego, int tope);
+public interface IPieceDistributer<T>{
+    void distribuir(DominoGame.Game<T> juego, int tope);
 }
-public class distribucionEquitativa: IPieceDistributer{
-   public void distribuir(DominoGame.Game juego, int tope){
+public class distribucionEquitativa<T>: IPieceDistributer<T>{
+   public void distribuir(DominoGame.Game<T> juego, int tope){
         foreach (var jug in juego.Jugadores)
         {
              for (var i = 0; i < juego.reglas.Cantidad_Inicial_En_La_Mano; i++) {
@@ -13,8 +13,8 @@ public class distribucionEquitativa: IPieceDistributer{
         }
     }
 }
-public class distribucionRandom: IPieceDistributer{
-   public void distribuir(DominoGame.Game juego, int tope){
+public class distribucionRandom<T>: IPieceDistributer<T>{
+   public void distribuir(DominoGame.Game<T> juego, int tope){
              Random r = new();
              while(true){
                int jugadorACoger = r.Next(juego.Jugadores.Count());
@@ -23,8 +23,8 @@ public class distribucionRandom: IPieceDistributer{
                 break;
                }
              }
-             foreach (var jug in juego.Jugadores){
+             foreach (var jug in juego.Jugadores)
                juego.manos[jug].Add(juego.fichasDelJuego.TomarUna());
-            }
+            
 		}
 }

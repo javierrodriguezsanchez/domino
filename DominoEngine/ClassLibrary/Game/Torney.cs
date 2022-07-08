@@ -4,19 +4,19 @@ using DominoRules;
 using DominoTable;
 
 namespace DominoGame;
-public class Torney: IEnumerable<Game> {
-	Player[] _jugadores; 
-	public readonly Rules Reglas;
-	public Game JuegoActual;
+public class Torney<T>: IEnumerable<Game<T>> {
+	Player<T>[] _jugadores; 
+	public readonly Rules<T> Reglas;
+	public Game<T> JuegoActual;
 	public Dictionary<int, double> Scores = new();
 	//Diccionario que a cada equipo le hace corresponder su puntuacion
 	public int Ganador = -1;
 	public bool primerMovenext = true;
 
-	public Torney(Player[] jugadores, Rules reglas) {
+	public Torney(Player<T>[] jugadores, Rules<T> reglas) {
 		_jugadores = jugadores;
 		Reglas = reglas;
-		JuegoActual = new Game(jugadores, reglas);
+		JuegoActual = new Game<T>(jugadores, reglas);
         foreach (var jug in jugadores){
 			if(!Scores.ContainsKey(jug.Equipo)){
                 Scores.Add(jug.Equipo, 0);
@@ -26,22 +26,22 @@ public class Torney: IEnumerable<Game> {
 
 	void RepartidorDePuntos() => Reglas.TipoDeTorneo.RepartidorDePuntos(this);
 		
-	void NuevaPartida() => JuegoActual = new Game(_jugadores, Reglas);
+	void NuevaPartida() => JuegoActual = new Game<T>(_jugadores, Reglas);
 
 	bool SeAcabo() => Reglas.TipoDeTorneo.SeAcabo(this);
 
-    public IEnumerator<Game> GetEnumerator() => new Enumerator(this);
+    public IEnumerator<Game<T>> GetEnumerator() => new Enumerator(this);
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     
-    class Enumerator : IEnumerator<Game>
+    class Enumerator : IEnumerator<Game<T>>
     {
-		Torney _torn;
-        public Enumerator(Torney torn) {
+		Torney<T> _torn;
+        public Enumerator(Torney<T> torn) {
 			_torn= torn;
         }
 
-        public Game Current => _torn.JuegoActual;
+        public Game<T> Current => _torn.JuegoActual;
 
         object IEnumerator.Current => Current;
 

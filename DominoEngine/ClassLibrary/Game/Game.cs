@@ -4,40 +4,40 @@ using DominoTable;
 using System.Collections;
 
 namespace DominoGame {
-public class Game : IEnumerable<Escena> {
+public class Game<T> : IEnumerable<Escena<T>> {
 	public int Turno = 0;
     
 	bool primerTurno = true;
-	public GamePieces fichasDelJuego;
+	public GamePieces<T> fichasDelJuego;
 	//Turno actual
-	public Dictionary<int, List<Player>> equipos = new();
+	public Dictionary<int, List<Player<T>>> equipos = new();
 
 	//Diccionario que, a cada equipo le hace corresponder una lista de jugadores que lo componen
 	public int PasadosSeguidos = 0; //sirve para diferentes condiciones de victoria
 
-	public Player JugadorActual => Jugadores[Turno % Jugadores.Length];
+	public Player<T> JugadorActual => Jugadores[Turno % Jugadores.Length];
     //Jugador al cual le corresponde jugar
 	public int cantFichasJugadorActual => manos[JugadorActual].Count;
     //Cantidad de fichas en la mano del jugador actual
     
-	public Player[] Jugadores; //Voa cambiar esto despues. Ese array  ta feo
-	public Dictionary<Player, List<Piece>> manos = new();
+	public Player<T>[] Jugadores; //Voa cambiar esto despues. Ese array  ta feo
+	public Dictionary<Player<T>, List<Piece<T>>> manos = new();
 	//Diccionario que le hace corresponder su mano a cada jugador
-	public Rules reglas;
+	public Rules<T> reglas;
 	//Reglas del juego
-	public Table Tablero = new(); 
+	public Table<T> Tablero = new(); 
 	//Tablero del juego
 
-	public Game(Player[] jugadores, Rules reglas) {
+	public Game(Player<T>[] jugadores, Rules<T> reglas) {
 		Jugadores = jugadores;
 		this.reglas = reglas;
-		fichasDelJuego = new GamePieces(reglas.Tope, reglas.Generator);
+		fichasDelJuego = new GamePieces<T>(reglas.Tope, reglas.Generator);
 		foreach (var jug in jugadores) {
 			if (!equipos.ContainsKey(jug.Equipo)) {
-				equipos.Add(jug.Equipo, new List<Player>());
+				equipos.Add(jug.Equipo, new List<Player<T>>());
 			}
 			equipos[jug.Equipo].Add(jug);
-			manos.Add(jug, new List<Piece>());	
+			manos.Add(jug, new List<Piece<T>>());	
 		}
 		reglas.Repartidor.distribuir(this, reglas.Tope);		
 	}
@@ -49,7 +49,7 @@ public class Game : IEnumerable<Escena> {
 	private void AvanzarTurno() => Turno++;
 
 
-	public IEnumerator<Escena> GetEnumerator() {
+	public IEnumerator<Escena<T>> GetEnumerator() {
 		while (!SeAcabo()) {
 			if(primerTurno){
 			yield return new(this);

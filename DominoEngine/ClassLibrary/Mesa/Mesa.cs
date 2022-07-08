@@ -1,14 +1,14 @@
 using System;
 using DominoPlayer;
 namespace DominoTable{
-    public class Table
+    public class Table<T>
 {   int cant = 0;
     public bool nuevaMesa = true;
     private Jugada? Salida = null;
     private Jugada? Izquierda = null;
     private Jugada? Derecha = null;
     private List<Pase> Pases = new List<Pase>();
-    public List<int> Disponibles = new int[]{-1, -1}.ToList();
+    public T[] Disponibles = new T[2];
   
     private IEnumerable<Jugada> jugadas(){
         if(Izquierda is not null){
@@ -19,11 +19,11 @@ namespace DominoTable{
             }
         }
     }
-    public IEnumerable<Piece> VerMesaActual(){
+    public IEnumerable<Piece<T>> VerMesaActual(){
         foreach (var jug in jugadas()){
-            if(jug.invertida) {yield return new Piece(jug.Ficha.values.Reverse().ToArray());} 
+            if(jug.invertida) {yield return new Piece<T>(jug.Ficha.values.Reverse().ToArray());} 
             else {
-               yield return new Piece(jug.Ficha.values);
+               yield return new Piece<T>(jug.Ficha.values);
             }
         }
     }
@@ -32,19 +32,18 @@ namespace DominoTable{
     }
     public IEnumerable<Pase> ListaDePases() => Pases;
     
-    public int this[int index] {get{return Disponibles[index];}}  
     
-    public void pasarse(Player jug){
+    public void pasarse(Player<T> jug){
         Pases.Add(new Pase(Disponibles, jug, cant));
         cant ++;
     }
-    public void abrirMesa(Piece ficha, Player jug){
+    public void abrirMesa(Piece<T> ficha, Player<T> jug){
         nuevaMesa = false;
-        Disponibles = ficha.values.ToList();
+        Disponibles = (T[])ficha.values.Clone();
         Izquierda = Derecha = Salida = new Jugada(ficha, jug, cant);
         cant ++;
     }
-    public void JugarEnPos(Piece Ficha, Player jug, int cara, int pos){
+    public void JugarEnPos(Piece<T> Ficha, Player<T> jug, int cara, int pos){
         Jugada NJ = new Jugada(Ficha, jug, cant);
         if(pos == 0){
             if(Izquierda is null) throw new Exception("Pos Invalida");
@@ -69,10 +68,10 @@ namespace DominoTable{
         cant ++;
     }
     public class Pase{
-        public readonly List<int> Disponibles;
-        public readonly Player Jug;
+        public readonly T[] Disponibles;
+        public readonly Player<T> Jug;
         public readonly int Momento;
-        public Pase(List<int> disponibles, Player jug, int momento){
+        public Pase(T[] disponibles, Player<T> jug, int momento){
             Disponibles = disponibles;
             Jug = jug;
             Momento = momento;
@@ -80,12 +79,12 @@ namespace DominoTable{
     }
     public class Jugada{
         public bool invertida = false;
-        public Piece Ficha;
+        public Piece<T> Ficha;
         public Jugada? Izquierda = null;
         public Jugada? Derecha = null;
         public int Momento;
-        public Player Jugador;
-        public Jugada(Piece ficha, Player jug, int cant){
+        public Player<T> Jugador;
+        public Jugada(Piece<T> ficha, Player<T> jug, int cant){
             Ficha = ficha;
             Jugador = jug;
             Momento = cant;

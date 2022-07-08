@@ -1,13 +1,13 @@
 namespace DominoGame;
 using DominoTable;
 using DominoPlayer;
-public class Escena
+public class Escena<T>
 {
-    public IEnumerable<Piece> Tablero;
-    public Player JugadorUltimaJugada;
-    public Dictionary<Player, List<Piece>> manos;
+    public IEnumerable<Piece<T>> Tablero;
+    public Player<T> JugadorUltimaJugada;
+    public Dictionary<Player<T>, List<Piece<T>>> manos;
     int ganador;
-    public Escena(Game Juego)
+    public Escena(Game<T> Juego)
     {
         Tablero = Juego.Tablero.VerMesaActual();
         JugadorUltimaJugada = Juego.JugadorActual;

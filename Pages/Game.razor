@@ -237,13 +237,13 @@
 }
 
 @code{
-    static DominoTable.Piece[] mano1=Bridge.escenas.Current.manos[Bridge.jugadores[0]].ToArray();
-    static DominoTable.Piece[] mano2=Bridge.escenas.Current.manos[Bridge.jugadores[1]].ToArray();
-    static DominoTable.Piece[] mano3=
+    static DominoTable.Piece<int>[] mano1=Bridge.escenas.Current.manos[Bridge.jugadores[0]].ToArray();
+    static DominoTable.Piece<int>[] mano2=Bridge.escenas.Current.manos[Bridge.jugadores[1]].ToArray();
+    static DominoTable.Piece<int>[] mano3=
     Bridge.jugadores.Length>=3?Bridge.escenas.Current.manos[Bridge.jugadores[2]].ToArray():null!;
-    static DominoTable.Piece[] mano4=
+    static DominoTable.Piece<int>[] mano4=
     Bridge.jugadores.Length>=3?Bridge.escenas.Current.manos[Bridge.jugadores[2]].ToArray():null!;
-    static DominoTable.Piece[] mesa=Bridge.escenas.Current.Tablero.ToArray();
+    static DominoTable.Piece<int>[] mesa=Bridge.escenas.Current.Tablero.ToArray();
     bool TodoCorrecto=true;
     bool EndOfTheTorney=false;
     bool EndOfTheRound=false;
@@ -291,7 +291,7 @@
 
     protected override void OnInitialized()
     {
-        Bridge.torneo=new DominoGame.Torney(Bridge.jugadores,Bridge.reglas);
+        Bridge.torneo=new DominoGame.Torney<int>(Bridge.jugadores,Bridge.reglas);
         Bridge.juegos=Bridge.torneo.GetEnumerator();
         if(Bridge.juegos.MoveNext())
         {

@@ -6,30 +6,30 @@ using System.Linq;
 
 namespace DominoPlayer{
 
-public interface IEstrategia
+public interface IEstrategia<T>
 {
-    public (Piece, int, int) Play(IEnumerable<Piece> mano, int[] PosDisponibles, Rules reglas, bool nuevaMesa);
+    public (Piece<T>, int, int) Play(IEnumerable<Piece<T>> mano, T[] PosDisponibles, Rules<T> reglas, bool nuevaMesa);
     //Retorno la pieza a jugar, la posicion donde jugarla y la cara por donde jugar.
 }
 
-public class estrategiaBorracho: IEstrategia{   
-    public (Piece, int, int) Play(IEnumerable<Piece> mano, int[] posicionesDisp, Rules reglas, bool nuevaMesa) => 
+public class estrategiaBorracho<T>: IEstrategia<T>{   
+    public (Piece<T>, int, int) Play(IEnumerable<Piece<T>> mano, T[] posicionesDisp, Rules<T> reglas, bool nuevaMesa) => 
     MetodosAuxiliares.CogerPrimera(mano, posicionesDisp ,reglas, nuevaMesa);
     //Es el jugador booracho, juega la primera ficha que ve
     }
     
-public class estrategiaBotaGorda: IEstrategia{
-    public (Piece, int, int) Play(IEnumerable<Piece> mano, int[] disp, Rules reglas, bool nuevaMesa){
+public class estrategiaBotaGorda<T>: IEstrategia<T>{
+    public (Piece<T>, int, int) Play(IEnumerable<Piece<T>> mano, T[] disp, Rules<T> reglas, bool nuevaMesa){
        
-        IEnumerable<Piece> manoOrdenada = mano.OrderByDescending(ficha => reglas.Evaluador.Evaluar(ficha));
+        IEnumerable<Piece<T>> manoOrdenada = mano.OrderByDescending(ficha => reglas.Evaluador.Evaluar(ficha));
         return MetodosAuxiliares.CogerPrimera(manoOrdenada, disp,reglas, nuevaMesa);
         //Es el famoso Bota-Gordas, siempre trata de jugar la ficha de mayor valor posible
     }
 }
 
-public class BotaMasRepetida: IEstrategia{
-    public (Piece, int, int) Play(IEnumerable<Piece> mano, int[] disp, Rules reglas, bool nuevaMesa){
-        IEnumerable<Piece> manoOrdenada = mano.OrderByDescending(fichaOrd => 
+public class BotaMasRepetida<T>: IEstrategia<T>{
+    public (Piece<T>, int, int) Play(IEnumerable<Piece<T>> mano, T[] disp, Rules<T> reglas, bool nuevaMesa){
+        IEnumerable<Piece<T>> manoOrdenada = mano.OrderByDescending(fichaOrd => 
         mano.Where(FichaEnMano => FichaEnMano.values.Any(valor => fichaOrd.values.Contains(valor))).Count());
         return MetodosAuxiliares.CogerPrimera(mano,disp,reglas, nuevaMesa);
     }
@@ -38,9 +38,9 @@ public class BotaMasRepetida: IEstrategia{
 
 
 static class MetodosAuxiliares{
-    public static (Piece ficha, int posicion, int cara) CogerPrimera(IEnumerable<Piece> mano, int[] posicionesDisp, Rules reglas, bool NuevaMesa){
+    public static (Piece<T> ficha, int posicion, int cara) CogerPrimera<T>(IEnumerable<Piece<T>> mano, T[] posicionesDisp, Rules<T> reglas, bool NuevaMesa){
             
-          foreach (Piece ficha in mano)
+          foreach (Piece<T> ficha in mano)
           {
               for (int i = 0; i < posicionesDisp.Length; i++)
               {
@@ -52,7 +52,7 @@ static class MetodosAuxiliares{
               }
           }
         
-        return (new Piece(), int.MaxValue,int.MaxValue);
+        return (new Piece<T>(), int.MaxValue,int.MaxValue);
    }
  
 }
