@@ -12,7 +12,7 @@ public class NormalTur<T>:ITurn<T>
 {
     public void Play(Player<T> Jugador, Game<T> Juego)
     {
-        (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),  Juego.reglas, Juego.Tablero.nuevaMesa);
+        (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),Juego.Tablero.Historial(false),Juego.Tablero.ListaDePases(),  Juego.reglas, Juego.Tablero.nuevaMesa);
         
         if(AJugar.Item1.IsNull){
                 Juego.PasadosSeguidos ++;
@@ -26,7 +26,7 @@ public class NormalTur<T>:ITurn<T>
 public class Robadito<T>:ITurn<T>{
     public void Play(Player<T> Jugador, Game<T> Juego)
     {
-        (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),  Juego.reglas, Juego.Tablero.nuevaMesa);
+        (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),Juego.Tablero.Historial(false),Juego.Tablero.ListaDePases(),  Juego.reglas, Juego.Tablero.nuevaMesa);
         
         if(AJugar.Item1.IsNull){
                 Juego.Tablero.pasarse(Jugador);
@@ -46,7 +46,7 @@ public class Ciclomino<T>: ITurn<T>{
     public void Play(Player<T> Jugador, Game<T> Juego)
     {   
         if(Juego.manos[Jugador].Count == 0) return; 
-        (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),  Juego.reglas, Juego.Tablero.nuevaMesa);
+        (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),Juego.Tablero.Historial(false),Juego.Tablero.ListaDePases(),  Juego.reglas, Juego.Tablero.nuevaMesa);
         
         if(AJugar.Item1.IsNull){
                 Juego.PasadosSeguidos ++;

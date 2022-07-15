@@ -1,0 +1,57 @@
+MANUAL DE USUARIO:
+------------------
+
+Bienvenido al simulador de partidas de domino 1.3
+Esta aplicación tiene como objetivo representar una partida de dominó con diferentes variaciones de reglas, las cuales son elegidas en la pantalla principal.
+Entre las variaciones a elegir están:
+-El último doble disponible: Mínimo el doble 4, es personalizable
+-El número de jugadores: entre 2 y 4
+-La máxima cantidad inicial de fichas al inicio del juego: puede variar entre 3 y el máximo posible
+-Los nombres de los jugadores y sus respectivas estrategias
+-La distribución de los jugadores en equipos
+-La condición para poder poner o no una ficha
+-El estilo de juego que se llevara a cabo
+-Que equipo gana la partida
+-Cuánto vale cada ficha
+-Cuándo es que se acaba el juego
+-Si las fichas pueden estar repetidas o no
+-Si todos comienzan con la misma cantidad de fichas
+-La condición de victoria del torneo
+
+Entre las diferentes estrategias esta:
+-El Borracho: Este no sabe lo que hace, pone la primera que pueda poner
+-El BotaGorda: El enemigo #1 del doble 9, suelta siempre la que mas valga
+-El Agachao: Siempre evita jugar una que no lleve mucho
+-El Pro: Este esta escapao, sabe jugar bien
+
+Los equipos pueden ser:
+-1 contra todos: un reto personal
+-equilibrados: el clasico
+-todos contra todos: la guerra
+
+Entre las reglas están:
+-Todas las reglas estándares del dominó(por default)
+-El EscaleroDominó: solo puedes poner el blanco o una mayor
+-El Piramidominó: solo puedes poner o la superior o la inferior(ejemplo: el 5 solo puedes matarlo con el 4 o el 6)
+-El SiempreDobles: puedes poner un doble siempre
+-El Robadito: Si no llevas coges una ficha
+-El CicloDominó: Puedes salir con dos fichas, si juegas un doble puedes jugar de nuevo, si no llevas robas 1 y cambias el sentido del juego
+-Que el juego acabe cuando ocurran dos pases seguidos
+-Que el juego acabe cuando la suma de las fichas en la mesa superen una cantidad
+
+El resto de las posibles variaciones son más o menos obvias
+
+Una vez que se eligen las reglas, puede presionar el botón play para comenzar a ver la simulación
+
+Para cambiar entre una escena y otra se presiona el boton ▶ en la esquina superior izquierda
+
+Para salir de la simulación en medio de una ronda presione el botón ↩ en la esquina superior izquierda
+
+Al final de cada ronda vera el resumen del juego hasta el momento y podra seleccionar si continuar o salir
+
+Al final del juego saldrá el equipo ganador, sus puntos y podra ver un nuevo juego o volver al menu principal
+
+Esperamos de disfruten de este simulador.
+Creadores:
+Daniel Abad Fundora
+Javier Rodriguez Sanchez

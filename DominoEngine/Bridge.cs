@@ -34,6 +34,11 @@ static public class Bridge
                     jugadores[i]=new Player<int>(names[i], new BotaMasRepetida<int>(), teams[i]);
                     break;
                 }
+                case 3:
+                {
+                    jugadores[i]=new Player<int>(names[i], new Pro<int>(),teams[i]);
+                    break;
+                }
                 default:
                 {
                     jugadores[i]=new Player<int>(names[i], new estrategiaBotaGorda<int>(), teams[i]);

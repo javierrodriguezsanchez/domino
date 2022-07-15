@@ -2,10 +2,25 @@
 
 <PageTitle>Index</PageTitle>
 
+@if(manual)
+{
+    
+    <div>
+        <p>@text</p>
+    </div>
+
+  <button class="buttonindex" @onclick="DisplayManual">Volver</button>
+
+}
+@if(!manual)
+{
 <header>
     <h1>Domino⬜⬛</h1>
 </header>
-<h1 id="Nombre">Opciones</h1>
+<div style="display: flex;">
+    <div style="flex:1;"><h1 id="Nombre">Opciones</h1></div>
+    <div><button style="background-color: transparent;color:white;width:40px; font-size:25px;" @onclick="DisplayManual">?</button></div>
+</div>
 <form>
     <div>
         <div class="reglas">
@@ -48,6 +63,7 @@
                 <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=0" checked disabled="@(jug.numero>=numero_de_jugadores)">Borracho</label>
                 <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=1" value=1 disabled="@(jug.numero>=numero_de_jugadores)">BotaGorda</label>
                 <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=2" value=2 disabled="@(jug.numero>=numero_de_jugadores)">Agachado</label>
+                <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=3" value=3 disabled="@(jug.numero>=numero_de_jugadores)">Pro</label>
         </label>
         }
         </div>
@@ -156,9 +172,16 @@
         </NavLink>
     </div>
 </form>
-
+}
 
 @code{
+    string text="";
+    bool manual=false;
+    void DisplayManual()
+    {
+        manual=!manual;
+        //text=new StreamReader("C:\\Users\\Javier\\Desktop\\Domino\\intento de parte visual\\DominoServer\\Pages\\Manual de Usuario.txt").ReadToEnd();
+    }
     static int numero_de_jugadores=4;
     static int CantidadInicial=3;
     static int tipo=6;
@@ -182,10 +205,10 @@
     };
     Jugador[] jugadores=new Jugador[]
     {
-        new Jugador("Mewtwo", 1,0,0),
-        new Jugador("Pinsir", 2,0,1),
-        new Jugador("Lucario", 3,0,2),
-        new Jugador("Incineroar", 4,0,3)
+        new Jugador("Jugador 1", 1,0,0),
+        new Jugador("Jugador 2", 2,0,1),
+        new Jugador("Jugador 3", 3,0,2),
+        new Jugador("Jugador 4", 4,0,3)
     };
 
     int Turno;
