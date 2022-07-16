@@ -6,11 +6,8 @@ public interface IPieceDistributer<T>{
 public class distribucionEquitativa<T>: IPieceDistributer<T>{
    public void distribuir(DominoGame.Game<T> juego, int tope){
         foreach (var jug in juego.Jugadores)
-        {
-             for (var i = 0; i < juego.reglas.Cantidad_Inicial_En_La_Mano; i++) {
-				juego.manos[jug].Add(juego.fichasDelJuego.TomarUna());
-			}
-        }
+             for (var i = 0; i < tope; i++)
+				        juego.manos[jug].Add(juego.fichasDelJuego.TomarUna());
     }
 }
 public class distribucionRandom<T>: IPieceDistributer<T>{
@@ -24,7 +21,6 @@ public class distribucionRandom<T>: IPieceDistributer<T>{
                }
              }
              foreach (var jug in juego.Jugadores)
-               juego.manos[jug].Add(juego.fichasDelJuego.TomarUna());
-            
+               juego.manos[jug].Add(juego.fichasDelJuego.TomarUna());    
 		}
 }

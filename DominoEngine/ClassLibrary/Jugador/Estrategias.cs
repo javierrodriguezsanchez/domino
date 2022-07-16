@@ -1,6 +1,7 @@
 using DominoTable;
 using DominoGame;
 using DominoRules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -122,6 +123,13 @@ public class BotaMasRepetida<T>: IEstrategia<T>{
         mano.Where(FichaEnMano => FichaEnMano.values.Any(valor => fichaOrd.values.Contains(valor))).Count());
         return MetodosAuxiliares.CogerPrimera(manoOrdenada,disp,reglas, nuevaMesa);
     }
+}
+
+public class EstrategiaCambiante<T>: IEstrategia<T>{
+  IEstrategia<T>[] estrategias = new IEstrategia<T>[] {new estrategiaBorracho<T>(), new estrategiaBotaGorda<T>(), new BotaMasRepetida<T>(), new Pro<T>() };
+  Random r = new();
+  public (Piece<T>, int, int) Play(IEnumerable<Piece<T>> mano, T[] PosDisponibles , IEnumerable<Jugada<T>> Historial,IEnumerable<Pase<T>> pases, Rules<T> reglas, bool nuevaMesa,int EquipoDelJugador) =>
+     estrategias[r.Next(estrategias.Length)].Play(mano, PosDisponibles, Historial, pases, nuevaMesa, EquipoDelJugador);
 }
 
 

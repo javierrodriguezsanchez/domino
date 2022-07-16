@@ -53,11 +53,8 @@ public class Game<T> : IEnumerable<Escena<T>> {
 		while (!SeAcabo()) {
 			if(primerTurno){
 			yield return new(this);
-            primerTurno = false;
-			}
-			else{
-			AvanzarTurno();
-			}
+            primerTurno = false;}
+			else {AvanzarTurno();}
 			Jugar();
 			yield return new(this);
 		}
