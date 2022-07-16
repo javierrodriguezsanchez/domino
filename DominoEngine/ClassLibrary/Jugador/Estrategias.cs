@@ -129,7 +129,7 @@ public class EstrategiaCambiante<T>: IEstrategia<T>{
   IEstrategia<T>[] estrategias = new IEstrategia<T>[] {new estrategiaBorracho<T>(), new estrategiaBotaGorda<T>(), new BotaMasRepetida<T>(), new Pro<T>() };
   Random r = new();
   public (Piece<T>, int, int) Play(IEnumerable<Piece<T>> mano, T[] PosDisponibles , IEnumerable<Jugada<T>> Historial,IEnumerable<Pase<T>> pases, Rules<T> reglas, bool nuevaMesa,int EquipoDelJugador) =>
-     estrategias[r.Next(estrategias.Length)].Play(mano, PosDisponibles, Historial, pases, nuevaMesa, EquipoDelJugador);
+     estrategias[r.Next(estrategias.Length)].Play(mano, PosDisponibles, Historial, pases,reglas, nuevaMesa, EquipoDelJugador);
 }
 
 
