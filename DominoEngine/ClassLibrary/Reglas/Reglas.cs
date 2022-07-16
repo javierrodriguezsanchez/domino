@@ -28,27 +28,5 @@ public class Rules<T>{
       Repartidor = repartidor;
       Generator = generator;
    }
-
- 
-  /* public void NewConditionToPlay(ILegalPlay newRule)
-   //change the rules of the play
-   {
-      JugadaLegal=newRule;
-   }
-   public void NewValue(IEvaluadorFichas newPieceValue)
-   //change the criterio of value of the pieces
-   {
-      Evaluador=newPieceValue;
-   }
-   public void NewConditionToWin(IEndCondition newWin)
-   //change the condition to win
-   {
-      final=newWin;
-   }
-   public void ChangePlayersTurn(ITurn PlayerTurn)
-   {
-      this.Turno=PlayerTurn;
-   }
-   */
 }
 }

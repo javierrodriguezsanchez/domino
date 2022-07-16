@@ -3,13 +3,11 @@ using DominoPlayer;
 using DominoGame;
 namespace DominoRules;
 
-public interface ITurn<T>
-{
+public interface ITurn<T>{
     public void Play(Player<T> Jugador, Game<T> Juego);
 }
 
-public class NormalTur<T>:ITurn<T>
-{
+public class NormalTur<T>:ITurn<T>{
     public void Play(Player<T> Jugador, Game<T> Juego)
     {
         (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),Juego.Tablero.Historial(false),Juego.Tablero.ListaDePases(),  Juego.reglas, Juego.Tablero.nuevaMesa);
@@ -24,8 +22,7 @@ public class NormalTur<T>:ITurn<T>
 }
 
 public class Robadito<T>:ITurn<T>{
-    public void Play(Player<T> Jugador, Game<T> Juego)
-    {
+    public void Play(Player<T> Jugador, Game<T> Juego){
         (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),Juego.Tablero.Historial(false),Juego.Tablero.ListaDePases(),  Juego.reglas, Juego.Tablero.nuevaMesa);
         
         if(AJugar.Item1.IsNull){
@@ -39,12 +36,10 @@ public class Robadito<T>:ITurn<T>{
         
         MetodosAux.PonerFicha<T>(Juego,AJugar,Jugador);
     }
-
 }
 
 public class Ciclomino<T>: ITurn<T>{
-    public void Play(Player<T> Jugador, Game<T> Juego)
-    {   
+    public void Play(Player<T> Jugador, Game<T> Juego){   
         if(Juego.manos[Jugador].Count == 0) return; 
         (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),Juego.Tablero.Historial(false),Juego.Tablero.ListaDePases(),  Juego.reglas, Juego.Tablero.nuevaMesa);
         
@@ -83,8 +78,7 @@ class MetodosAux{
         }
         aux.CopyTo(array, 0);
    }
-   public static void PonerFicha<T>(Game<T> Juego, (Piece<T> ficha, int posicion,int cara) AJugar,Player<T> Jugador)
-   {
+   public static void PonerFicha<T>(Game<T> Juego, (Piece<T> ficha, int posicion,int cara) AJugar,Player<T> Jugador){
         if(Juego.Tablero.nuevaMesa){
             Juego.Tablero.abrirMesa(AJugar.ficha, Jugador);
             Juego.manos[Jugador].Remove(AJugar.ficha);
@@ -95,6 +89,5 @@ class MetodosAux{
             Juego.PasadosSeguidos = 0;
             Juego.manos[Jugador].Remove(AJugar.ficha);
         }
-
    }
 }
