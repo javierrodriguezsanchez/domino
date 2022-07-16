@@ -67,6 +67,7 @@
                 <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=1" value=1 disabled="@(jug.numero>=numero_de_jugadores)">BotaGorda</label>
                 <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=2" value=2 disabled="@(jug.numero>=numero_de_jugadores)">Agachado</label>
                 <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=3" value=3 disabled="@(jug.numero>=numero_de_jugadores)">El Duro</label>
+                <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=4" value=4 disabled="@(jug.numero>=numero_de_jugadores)">Impredecible</label>
         </label>
         }
         </div>
@@ -80,18 +81,18 @@
                         <option value=0>Domino Estandar</option>
                         <option value=1>Escalerodomino</option>
                         <option value=2>Piramidomino</option>
-                        <option value=3>Siempre se puede usar dobles</option>
+                        <option value=3>Siempre dobles</option>
                     </select>
                 </label>
             </div>
             
             <div>
                 <label>
-                    <p>El jugador:</p> 
+                    <p>Tipo de pase:</p> 
                     <select @bind-value="Turno" @bind-value:event="oninput">
-                        <option value=0>Solo pone una, y si no lleva se pasa</option>
-                        <option value=1>Solo pone una, y si no lleva toma una ficha</option>
-                        <option value=4>pone tantas sea posible, coge ficha de no llevar y cambia el sentido</option>
+                        <option value=0>Estandar</option>
+                        <option value=1>Robadito</option>
+                        <option value=4>CicloDomino</option>
                     </select>
                 </label>
             </div>

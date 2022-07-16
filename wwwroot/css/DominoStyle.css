@@ -62,7 +62,7 @@ header>h1{
     border-style: solid;
     border-color: white;
     border-radius: 20px;
-    overflow: scroll;
+    height: 480px;
 }
 
 #jugadores label{
@@ -77,6 +77,7 @@ header>h1{
 }
 #jugadores > label{
     min-width: 200px;
+    overflow-y:scroll;
 }
 
 
