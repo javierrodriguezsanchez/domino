@@ -43,7 +43,7 @@ public class Pro<T>: IEstrategia<T>
         {
             for(int i=0;i<disp.Length;i++)
             {
-                Jugada<T> Referida=i==0?Historial.First():Historial.Last();
+                Jugada<T> Referida=(i==0?Historial.First():Historial.Last());
                 for(int j=0;j<ficha.values.Length;j++)
                 {
                     if(!reglas.JugadaLegal.IsLegal(disp,ficha,i,j,nuevaMesa))
@@ -109,7 +109,9 @@ public class Pro<T>: IEstrategia<T>
                 for (int k = 0; k < Posibilitys.GetLength(2); k++)
                     if(Posibilitys[Max.Item1,Max.Item2,Max.Item3]<Posibilitys[i,j,k])
                         Max=(i,j,k);
-        return (mano.ElementAt(Max.Item1),Max.Item2,Max.Item3);
+        if(Posibilitys[Max.Item1,Max.Item2,Max.Item3]!=0)
+            return (mano.ElementAt(Max.Item1),Max.Item2,Max.Item3);
+        return (new Piece<T>(), int.MaxValue,int.MaxValue);
                 
     }
 }
@@ -127,7 +129,7 @@ public class EstrategiaCambiante<T>: IEstrategia<T>{
   IEstrategia<T>[] estrategias = new IEstrategia<T>[] {new estrategiaBorracho<T>(), new estrategiaBotaGorda<T>(), new BotaMasRepetida<T>(), new Pro<T>() };
   Random r = new();
   public (Piece<T>, int, int) Play(IEnumerable<Piece<T>> mano, T[] PosDisponibles , IEnumerable<Jugada<T>> Historial,IEnumerable<Pase<T>> pases, Rules<T> reglas, bool nuevaMesa,int EquipoDelJugador) =>
-     estrategias[r.Next(estrategias.Length)].Play(mano, PosDisponibles, Historial, pases, nuevaMesa, EquipoDelJugador);
+     estrategias[r.Next(estrategias.Length)].Play(mano, PosDisponibles, Historial, pases,reglas, nuevaMesa, EquipoDelJugador);
 }
 
 

@@ -23,6 +23,7 @@ Entre las diferentes estrategias esta:
 -El BotaGorda: El enemigo #1 del doble 9, suelta siempre la que mas valga
 -El Agachao: Siempre evita jugar una que no lleve mucho
 -El Pro: Este esta escapao, sabe jugar bien
+-El Impredecible: Cambia de estrategia repentinamente
 
 Los equipos pueden ser:
 -1 contra todos: un reto personal
