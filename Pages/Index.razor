@@ -5,8 +5,11 @@
 @if(manual)
 {
     
-    <div>
-        <p>@text</p>
+    <div style="padding:7%; padding-bottom:3%">
+        @foreach(var item in Manual.Lineas(text))
+        {
+            <p style="text-align: justify-content; font-size:30px; color:cyan;">@item</p>
+        }
     </div>
 
   <button class="buttonindex" @onclick="DisplayManual">Volver</button>
@@ -63,7 +66,7 @@
                 <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=0" checked disabled="@(jug.numero>=numero_de_jugadores)">Borracho</label>
                 <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=1" value=1 disabled="@(jug.numero>=numero_de_jugadores)">BotaGorda</label>
                 <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=2" value=2 disabled="@(jug.numero>=numero_de_jugadores)">Agachado</label>
-                <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=3" value=3 disabled="@(jug.numero>=numero_de_jugadores)">Pro</label>
+                <label><input type="radio" name="@jug.numero" @onclick="()=>jug.tipo_de_jugador=3" value=3 disabled="@(jug.numero>=numero_de_jugadores)">El Duro</label>
         </label>
         }
         </div>
@@ -180,7 +183,8 @@
     void DisplayManual()
     {
         manual=!manual;
-        //text=new StreamReader("C:\\Users\\Javier\\Desktop\\Domino\\intento de parte visual\\DominoServer\\Pages\\Manual de Usuario.txt").ReadToEnd();
+        text=Manual.text;
+        //text=File.ReadAllText(Directory.GetFiles(Directory.GetCurrentDirectory())[0]);
     }
     static int numero_de_jugadores=4;
     static int CantidadInicial=3;
