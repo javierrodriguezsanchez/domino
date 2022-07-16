@@ -6,7 +6,9 @@ namespace DominoTable
  public class Piece<T>
 {
     public T[] values{get; private set;}
+    //Valores en cada cara de la ficha
     public bool IsNull{get; private set;}
+    //Variable auxiliar para indicar pases y jugadas no legales
     public Piece()
     {
         values=new T[0];

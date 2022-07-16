@@ -8,6 +8,7 @@ public interface ITurn<T>{
 }
 
 public class NormalTur<T>:ITurn<T>{
+    //Juego usual, cada jugador pone una unica ficha por turno
     public void Play(Player<T> Jugador, Game<T> Juego)
     {
         (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),Juego.Tablero.Historial(false),Juego.Tablero.ListaDePases(),  Juego.reglas, Juego.Tablero.nuevaMesa);
@@ -22,6 +23,7 @@ public class NormalTur<T>:ITurn<T>{
 }
 
 public class Robadito<T>:ITurn<T>{
+    //Cada vez que un jugador se pasa, roba  una ficha 
     public void Play(Player<T> Jugador, Game<T> Juego){
         (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),Juego.Tablero.Historial(false),Juego.Tablero.ListaDePases(),  Juego.reglas, Juego.Tablero.nuevaMesa);
         
@@ -39,6 +41,8 @@ public class Robadito<T>:ITurn<T>{
 }
 
 public class Ciclomino<T>: ITurn<T>{
+    //Cada vez que un jugador se pasa, roba una ficha y se invierte la mesa. Ademas, luego de salir se puede juegar 
+    //de nuevo, al igual que al poner un doble
     public void Play(Player<T> Jugador, Game<T> Juego){   
         if(Juego.manos[Jugador].Count == 0) return; 
         (Piece<T> ficha, int posicion,int cara) AJugar = Jugador.Play(Juego.manos[Juego.JugadorActual].AsReadOnly(), Juego.Tablero.Disponibles.ToArray(),Juego.Tablero.Historial(false),Juego.Tablero.ListaDePases(),  Juego.reglas, Juego.Tablero.nuevaMesa);
@@ -67,6 +71,7 @@ public class Ciclomino<T>: ITurn<T>{
 }
 class MetodosAux{
     public static void Invertir<T>(T[] array, int indice){
+        //Invierte el orden de los jugadores
         T[] aux = new T[array.Length];
         for (int i = 0; i < array.Length; i++){
             if (i< indice) aux[i] = array[(indice + (indice - i))% array.Length];
@@ -79,6 +84,7 @@ class MetodosAux{
         aux.CopyTo(array, 0);
    }
    public static void PonerFicha<T>(Game<T> Juego, (Piece<T> ficha, int posicion,int cara) AJugar,Player<T> Jugador){
+    //Coloca una ficha en la mesa
         if(Juego.Tablero.nuevaMesa){
             Juego.Tablero.abrirMesa(AJugar.ficha, Jugador);
             Juego.manos[Jugador].Remove(AJugar.ficha);

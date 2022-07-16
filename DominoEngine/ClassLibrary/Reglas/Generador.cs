@@ -4,6 +4,7 @@ public interface IGenerator<T>{
     List<Piece<T>> Generate(int Tope);
 }
 public class ClassicGenerator: IGenerator<int>{
+    //Genera todas las combinaciones de 2 enteros de 0 a n
     public List<Piece<int>> Generate(int Top){
         List<Piece<int>> list = new List<Piece<int>>();
         for (int i = 0; i <= Top; i++){
@@ -15,6 +16,7 @@ public class ClassicGenerator: IGenerator<int>{
      }
 }
 public class CrazyGenerator: IGenerator<int>{
+    //Genera fichas validas aleatoriamente
     public List<Piece<int>> Generate(int top){
         List<Piece<int>> list = new();
         int cant = (top * (top + 1))/2;
@@ -26,6 +28,7 @@ public class CrazyGenerator: IGenerator<int>{
     }
 }
 public class CharGenerator: IGenerator<char>{
+    //Genera todas las combinaciones de los n+1 primeros caracteres
     public List<Piece<char>> Generate(int top){
         char[] abc = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
         List<Piece<char>> list = new();

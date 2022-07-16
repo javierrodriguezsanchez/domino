@@ -13,21 +13,26 @@ public interface IWinner<T>{
     public int Winner(Game<T> juego);
 }
  class FinPorTranque<T>: IEndCondition<T>{
+    //Se acaba cuando los pases consecutivos es igual a la cantidad de jugadores o cuando un jugador se queda 
+    //sin fichas en la mano
   public bool EndOfTheGame(Game<T> juego) =>
   juego.cantFichasJugadorActual == 0|| juego.PasadosSeguidos >= juego.Jugadores.Length;
     }
 
   class Mesa150puntos<T>: IEndCondition<T>{
+    //El juego termina cuando se acumulan 150 puntos en la mesa o se reunen las condiciones del fin por tranque
     public bool EndOfTheGame(Game<T> juego) => 
     juego.Tablero.Historial().Select(jug => jug.Ficha).Sum(t => juego.reglas.Evaluador.Evaluar(t)) >= 150 ||
      juego.cantFichasJugadorActual == 0 || juego.PasadosSeguidos >= juego.Jugadores.Length;
   }
   class DosPases<T>:IEndCondition<T>{
+    //El juego termina al ocurrir dos pases seguidos
      public bool EndOfTheGame(Game<T> juego) =>
      juego.cantFichasJugadorActual == 0|| juego.PasadosSeguidos == 2;
   }
 
 class finalPorPuntos<T>: IWinner<T>{
+    //Gana el equipo que tenga al jugador con menor suma de puntos en la mano
     public int Winner(Game<T> juego){
         if(juego.cantFichasJugadorActual == 0){
         return juego.JugadorActual.Equipo;}
@@ -50,6 +55,7 @@ class finalPorPuntos<T>: IWinner<T>{
 }
 }
 class TeamPoints<T>: IWinner<T>{
+    //Gana el equipo que, en su conjunto, sume menor cantidad de puntos
     public int Winner(Game<T> juego){
         if(juego.cantFichasJugadorActual == 0) 
             return juego.JugadorActual.Equipo;

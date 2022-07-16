@@ -30,6 +30,8 @@ public class estrategiaBotaGorda<T>: IEstrategia<T>{
 
 
 public class Pro<T>: IEstrategia<T>
+//Este jugador analiza el historial del juego y los pases de sus aliados y adversarios, decidiendo cual es 
+//la mejor ficha a jugar en cada momento
 {
     public (Piece<T>, int, int) Play(IEnumerable<Piece<T>> mano, T[] disp, IEnumerable<Jugada<T>> Historial,IEnumerable<Pase<T>> pases, Rules<T> reglas, bool nuevaMesa,int EquipoDelJugador)
     {
@@ -118,6 +120,7 @@ public class Pro<T>: IEstrategia<T>
 
 
 public class BotaMasRepetida<T>: IEstrategia<T>{
+    //Trata de solatar la ficha mas reemplazable posible
     public (Piece<T>, int, int) Play(IEnumerable<Piece<T>> mano, T[] disp, IEnumerable<Jugada<T>> Historial,IEnumerable<Pase<T>> pases, Rules<T> reglas, bool nuevaMesa,int EquipoDelJugador){
         IEnumerable<Piece<T>> manoOrdenada = mano.OrderByDescending(fichaOrd => 
         mano.Where(FichaEnMano => FichaEnMano.values.Any(valor => fichaOrd.values.Contains(valor))).Count());
@@ -126,6 +129,7 @@ public class BotaMasRepetida<T>: IEstrategia<T>{
 }
 
 public class EstrategiaCambiante<T>: IEstrategia<T>{
+    //Juega una de las demas estrategias de forma aleatoria
   IEstrategia<T>[] estrategias = new IEstrategia<T>[] {new estrategiaBorracho<T>(), new estrategiaBotaGorda<T>(), new BotaMasRepetida<T>(), new Pro<T>() };
   Random r = new();
   public (Piece<T>, int, int) Play(IEnumerable<Piece<T>> mano, T[] PosDisponibles , IEnumerable<Jugada<T>> Historial,IEnumerable<Pase<T>> pases, Rules<T> reglas, bool nuevaMesa,int EquipoDelJugador) =>
@@ -135,6 +139,7 @@ public class EstrategiaCambiante<T>: IEstrategia<T>{
 
 static class MetodosAuxiliares{
     public static (Piece<T> ficha, int posicion, int cara) CogerPrimera<T>(IEnumerable<Piece<T>> mano, T[] posicionesDisp, Rules<T> reglas, bool NuevaMesa){
+        //Juega la promera ficha posible en la mano
             
           foreach (Piece<T> ficha in mano)
           {
@@ -151,6 +156,7 @@ static class MetodosAuxiliares{
         return (new Piece<T>(), int.MaxValue,int.MaxValue);
    }
    public static Piece<T> PrimerDoble<T>(IEnumerable<Piece<T>> mano)
+   //Dado un conjunto de fichas, devuelve el primer doble
    {
         foreach(var ficha in mano)
         {

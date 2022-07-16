@@ -6,12 +6,17 @@ using DominoTable;
 namespace DominoGame;
 public class Torney<T>: IEnumerable<Game<T>> {
 	Player<T>[] _jugadores; 
+	//Jugadores del torneo
 	public readonly Rules<T> Reglas;
+	//Reglas del torneo
 	public Game<T> JuegoActual;
+	//Juego que se esta efectuando actualmente 
 	public Dictionary<int, double> Scores = new();
 	//Diccionario que a cada equipo le hace corresponder su puntuacion
 	public int Ganador = -1;
+	//Equipo ganador, en caso de no existir, se devuelve -1
 	public bool primerMovenext = true;
+	//Varieble auxiliar para ayudar al enumerador
 
 	public Torney(Player<T>[] jugadores, Rules<T> reglas) {
 		_jugadores = jugadores;
@@ -25,10 +30,11 @@ public class Torney<T>: IEnumerable<Game<T>> {
 	}	
 
 	void RepartidorDePuntos() => Reglas.TipoDeTorneo.RepartidorDePuntos(this);
-		
+		//Le asigna puntos a los jugadores segun las reglas
 	void NuevaPartida() => JuegoActual = new Game<T>(_jugadores, Reglas);
-
+      //Inicia un nuevo juego 
 	bool SeAcabo() => Reglas.TipoDeTorneo.SeAcabo(this);
+	//Decide si el torneo ha concluido segun las reglas
 
     public IEnumerator<Game<T>> GetEnumerator() => new Enumerator(this);
 
