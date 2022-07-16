@@ -40,7 +40,7 @@ public class Game<T> : IEnumerable<Escena<T>> {
 			equipos[jug.Equipo].Add(jug);
 			manos.Add(jug, new List<Piece<T>>());	
 		}
-		reglas.Repartidor.distribuir(this, reglas.Tope);
+		reglas.Repartidor.distribuir(this, reglas.Cantidad_Inicial_En_La_Mano);
 		//Reparte las fichas del juego segun las reglas		
 	}
 

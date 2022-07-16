@@ -196,13 +196,13 @@
       "mscorlib.dll": "sha256-tlYWYAypJO+6gsCjV734iAJn8xcZYhUjM7vgxDLJluE=",
       "netstandard.dll": "sha256-E48Na3ZQWKExltzTwgP0Ao+UqWhiVYeerXfUL9lEc+c=",
       "System.Private.CoreLib.dll": "sha256-J85Z1XnwapHef31sR58JFq+0HrFP5BjOoObPKjdFHCw=",
-      "DominoServer.dll": "sha256-UauMGT3Ww33C6UM2\/+wUHdxcGd2WhHmwe4dr6ETZI8s="
+      "DominoServer.dll": "sha256-PGNvcgb71JCoa5S3KkqiPo7Df\/T2hQ3xa7MciQoWwC0="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "DominoServer.pdb": "sha256-5Rpfj5ZDHZywQbv0BoPxKoADb73L9SgCvolwHhG\/nn0="
+      "DominoServer.pdb": "sha256-ikCJAbrnNqpuJvbt1bxyz9aQkVZ654RJ\/0XM7KyULCY="
     },
     "runtime": {
       "dotnet.6.0.0.fol6uitalh.js": "sha256-LOq52qjRa3+zt3w4UL10rS3UdwHxVQxW0JAsMPO9QAM=",

@@ -46,7 +46,7 @@
                 <input type="number" min="2" max="4" @bind-value="@numero_de_jugadores" @bind-value:event="oninput" class="number">
             </div>
             <div>
-                    <p>Maxima cantidad inicial de fichas</p> 
+                    <p>Maxima cantidad inicial de fichas @CantidadInicial</p> 
                     <input type="number" min="3" max="@MaximoInicial(tipo==10?tipo2:tipo)" @bind-value="@CantidadInicial" @bind-value:event="oninput" class="number">
             </div>
         </div> 
@@ -103,7 +103,6 @@
                     <select @bind-value="Ganador" @bind-value:event="oninput">
                         <option value=0>Con el jugador de menor puntuacion</option>
                         <option value=1>Con la menor suma de puntuaciones</option>
-                        <option value=2>Con la menor de las mayores puntuaciones del equipo</option>
                     </select>
                 </label>
             </div>
@@ -237,7 +236,7 @@
             tipos[i]=jugadores[i].tipo_de_jugador;
         }
 
-        Bridge.CrearTorneo(numero_de_jugadores,tipo==10?tipo2:tipo,CantidadInicial,nombres,equipos,tipos,
+        Bridge.CrearTorneo(numero_de_jugadores,(tipo==10?tipo2:tipo),CantidadInicial,nombres,equipos,tipos,
         Turno,Juez,Final,Torneo,Ganador,Repartidor,Generador,Evaluador);
     }
 }
