@@ -13,7 +13,6 @@ static public class Bridge
     public static void CrearTorneo(int NumOfPlayers, int top, int max, string[] names, int[] teams, 
     int[] tipes, int Turn, int judge, int end, int torney, int winner, int deliver, int generator, int evaluator)
     {
-        System.Console.WriteLine(123478);
         jugadores= new Player<int>[NumOfPlayers];
         for(int i=0;i<NumOfPlayers;i++)
         {

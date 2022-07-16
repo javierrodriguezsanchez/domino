@@ -11,37 +11,37 @@ build_property.EnableTrimAnalyzer = true
 build_property.IncludeAllContentForSelfExtract = 
 build_property.RootNamespace = DominoServer
 build_property.RootNamespace = DominoServer
-build_property.ProjectDir = c:\Users\Javier\Desktop\Domino\intento de parte visual\DominoServer\
+build_property.ProjectDir = C:\Users\Javier\Desktop\Domino\intento de parte visual\DominoServer\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Users\Javier\Desktop\Domino\intento de parte visual\DominoServer
+build_property.MSBuildProjectDirectory = C:\Users\Javier\Desktop\Domino\intento de parte visual\DominoServer
 build_property._RazorSourceGeneratorDebug = 
 
-[c:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/App.razor]
+[C:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Pages/Components/Piece.razor]
+[C:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Pages/Components/Piece.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tcG9uZW50c1xQaWVjZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Pages/Game.razor]
+[C:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Pages/Game.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2FtZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Pages/Index.razor]
+[C:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Shared/MainLayout.razor]
+[C:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Shared/SurveyPrompt.razor]
+[C:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/_Imports.razor]
+[C:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

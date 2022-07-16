@@ -242,7 +242,7 @@
     static DominoTable.Piece<int>[] mano3=
     Bridge.jugadores.Length>=3?Bridge.escenas.Current.manos[Bridge.jugadores[2]].ToArray():null!;
     static DominoTable.Piece<int>[] mano4=
-    Bridge.jugadores.Length>=3?Bridge.escenas.Current.manos[Bridge.jugadores[2]].ToArray():null!;
+    Bridge.jugadores.Length>=4?Bridge.escenas.Current.manos[Bridge.jugadores[3]].ToArray():null!;
     static DominoTable.Piece<int>[] mesa=Bridge.escenas.Current.Tablero.ToArray();
     bool TodoCorrecto=true;
     bool EndOfTheTorney=false;
@@ -302,7 +302,7 @@
         mano1=Bridge.escenas.Current.manos[Bridge.jugadores[0]].ToArray();
         mano2=Bridge.escenas.Current.manos[Bridge.jugadores[1]].ToArray();
         mano3=Bridge.jugadores.Length>=3?Bridge.escenas.Current.manos[Bridge.jugadores[2]].ToArray():null!;
-        mano4=Bridge.jugadores.Length>=3?Bridge.escenas.Current.manos[Bridge.jugadores[3]].ToArray():null!;
+        mano4=Bridge.jugadores.Length>=4?Bridge.escenas.Current.manos[Bridge.jugadores[3]].ToArray():null!;
         mesa=Bridge.escenas.Current.Tablero.ToArray();
         TodoCorrecto=true;
         EndOfTheTorney=false;
