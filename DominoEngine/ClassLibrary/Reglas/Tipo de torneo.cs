@@ -33,6 +33,7 @@ public class TornPorPuntos<T>: ITorn<T>{
 	}
 class MetodosAuxiliares{
 	public static bool VerificarPuntuacionMaxima <T>(Torney<T> torn, int cant){
+		//Verifica si un equipo ha superado cierta cantidad de puntos
 		foreach (int equipo in torn.Scores.Keys) {
 			if (torn.Scores[equipo] >= cant) {
 				torn.Ganador = equipo;

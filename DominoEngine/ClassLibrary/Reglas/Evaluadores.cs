@@ -44,6 +44,7 @@ public class DoubleDoublesEvaluator: IPieceEvaluator<int>{
 // en otro caso, se comporta como un evaluador por suma
 }
 public class CharEvaluator: IPieceEvaluator<Char>{
+    //A cada caracter le asigna su posicion en el alfabeto latino
     Char[] abc = new Char[]{'a', 'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
     public double Evaluar(Piece<char> ficha){
         int llevo = 0;

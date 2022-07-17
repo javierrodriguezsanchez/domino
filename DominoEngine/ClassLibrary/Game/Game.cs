@@ -32,6 +32,7 @@ public class Game<T> : IEnumerable<Escena<T>> {
 		Jugadores = jugadores;
 		this.reglas = reglas;
 		fichasDelJuego = new GamePieces<T>(reglas.Tope, reglas.Generator);
+		//Genera las fichs del juego segun las reglas
 		foreach (var jug in jugadores) {
 			if (!equipos.ContainsKey(jug.Equipo)) {
 				equipos.Add(jug.Equipo, new List<Player<T>>());
@@ -39,14 +40,18 @@ public class Game<T> : IEnumerable<Escena<T>> {
 			equipos[jug.Equipo].Add(jug);
 			manos.Add(jug, new List<Piece<T>>());	
 		}
-		reglas.Repartidor.distribuir(this, reglas.Tope);		
+		reglas.Repartidor.distribuir(this, reglas.Tope);
+		//Reparte las fichas del juego segun las reglas		
 	}
 
 	public void Jugar() => reglas.Turno.Play(JugadorActual, this);
+	//Se ejecutan las acciones a realizar en un turno segun las reglas
 
 	public bool SeAcabo() => reglas.Final.EndOfTheGame(this);
+	//Analiza si el juego esta o no terminado
 
 	private void AvanzarTurno() => Turno++;
+	//Aumenta el contador de turnos
 
 
 	public IEnumerator<Escena<T>> GetEnumerator() {
