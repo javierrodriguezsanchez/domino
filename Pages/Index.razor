@@ -28,17 +28,22 @@
     <div>
         <div class="reglas">
             <div>
-                <p>Tipo de domino</p> 
+                <p>Tipo de domino</p>
                 <select @bind-value="tipo" @bind-value:event="oninput">
                     @for (int i = 4; i <= 9; i++)
                     {
                         <option value=@i>@(i)x@(i)</option>
                     }
                     <option value=10>otro</option>
+                    <option value=11>letras</option>
                 </select>
                 @if (tipo==10)
                 {
-                    <input type="number" min=4 @bind-value="tipo2" @bind-value:event="oninput">
+                    <input type="number" min=4 @bind-value="tipo2" @bind-value:event="oninput" style="width: 50px;">
+                }
+                @if (tipo==11)
+                {
+                    <input type="text" maxlength="1" minlength="1" @bind-value="tipo3" @bind-value:event="oninput" style="width: 50px;">
                 }
             </div>
             <div>
@@ -46,8 +51,8 @@
                 <input type="number" min="2" max="4" @bind-value="@numero_de_jugadores" @bind-value:event="oninput" class="number">
             </div>
             <div>
-                    <p>Maxima cantidad inicial de fichas @CantidadInicial</p> 
-                    <input type="number" min="3" max="@MaximoInicial(tipo==10?tipo2:tipo)" @bind-value="@CantidadInicial" @bind-value:event="oninput" class="number">
+                    <p>Maxima cantidad inicial de fichas</p> 
+                    <input type="number" min="3" max="@MaximoInicial(Number())" @bind-value="@CantidadInicial" @bind-value:event="oninput" class="number">
             </div>
         </div> 
 
@@ -79,9 +84,12 @@
                     <p>Reglas de domino</p> 
                     <select @bind-value="Juez" @bind-value:event="oninput">
                         <option value=0>Domino Estandar</option>
-                        <option value=1>Escalerodomino</option>
-                        <option value=2>Piramidomino</option>
                         <option value=3>Siempre dobles</option>
+                        @if(tipo!=11)
+                        {
+                            <option value=1>Escalerodomino</option>
+                            <option value=2>Piramidomino</option>
+                        }
                     </select>
                 </label>
             </div>
@@ -124,12 +132,19 @@
                 <label>
                     <p>Valor de las fichas</p> 
                     <select @bind-value="Evaluador" @bind-value:event="oninput">
-                        <option value=0>Suma de puntos</option>
-                        <option value=1>Dobles cuentan dobles</option>
-                        <option value=2>Multiplicacion de las caras</option>
-                        <option value=3>Norma asociada</option>
+                        @if(tipo!=11)
+                        {
+                            <option value=0>Suma de puntos</option>
+                            <option value=1>Dobles cuentan dobles</option>
+                            <option value=2>Multiplicacion de las caras</option>
+                            <option value=3>Norma asociada</option>
+                            <option value=5>Cara Maxima</option>
+                        }
+                        @if(tipo==11)
+                        {
+                            <option value=6>Evaluador de caracteres</option>    
+                        }
                         <option value=4>Todas iguales</option>
-                        <option value=5>Cara Maxima</option>
                     </select>
                 </label>
             </div>
@@ -150,8 +165,15 @@
                 <label>
                     <p>Fichas:</p> 
                     <select @bind-value="Generador" @bind-value:event="oninput">
-                        <option value=0>Sin repeticion</option>
-                        <option value=1>Con repeticion igual a la cantidad</option>
+                        @if(tipo==11)
+                        {
+                            <option value=2>Generador de caracteres</option>    
+                        }
+                        @if(tipo!=11)
+                        {
+                            <option value=0>Sin repeticion</option>
+                            <option value=1>Con repeticion igual a la cantidad</option>
+                        }
                     </select>
                 </label>
             </div>
@@ -168,8 +190,8 @@
         </div>
         </div>
         
-        <NavLink href="Game" class="NavLink">
-            <button @onclick="Play" class="buttonindex">
+        <NavLink href=@(tipo==11?"GameChar":"Game") class="NavLink">
+            <button @onclick="Play" class="buttonindex" disabled=@(tipo==11&&(tipo3.Length==0 || !Char.IsLetter(tipo3[0])))>
                 <p style=" margin-bottom:0px;">¡JUGAR!</p>
             </button>
         </NavLink>
@@ -190,9 +212,18 @@
     static int CantidadInicial=3;
     static int tipo=6;
     static int tipo2=10;
-    public static int MaximoInicial(int a)
+    static string tipo3="k";
+    public static int MaximoInicial(int a)@*cambiar aqui*@
     {
         return ((a+2)*(a+1)/2)/numero_de_jugadores;
+    }
+    public static int Number()
+    {
+        if (tipo==11)
+        {
+            return (tipo3.Length==0 || !Char.IsLetter(tipo3[0]))?3:Char.ToLower(tipo3[0])-'a';
+        }
+        return tipo==10?tipo2:tipo;
     }
     class Jugador{
     public int tipo_de_jugador;
@@ -226,6 +257,7 @@
 
     void Play()
     {
+        
         string[] nombres=new string[numero_de_jugadores];
         int[] equipos=new int[numero_de_jugadores];
         int[] tipos=new int[numero_de_jugadores];
@@ -235,8 +267,11 @@
             equipos[i]=jugadores[i].equipo;
             tipos[i]=jugadores[i].tipo_de_jugador;
         }
-
-        Bridge.CrearTorneo(numero_de_jugadores,(tipo==10?tipo2:tipo),CantidadInicial,nombres,equipos,tipos,
-        Turno,Juez,Final,Torneo,Ganador,Repartidor,Generador,Evaluador);
+        if(tipo<=10)
+            Bridge.CrearTorneo(numero_de_jugadores,Number(),CantidadInicial,nombres,equipos,tipos,
+            Turno,Juez,Final,Torneo,Ganador,Repartidor,Generador,Evaluador);
+        else
+            Bridge2.CrearTorneo(numero_de_jugadores,Number(),CantidadInicial,nombres,equipos,tipos,
+            Turno,Juez,Final,Torneo,Ganador,Repartidor,Generador,Evaluador);
     }
 }

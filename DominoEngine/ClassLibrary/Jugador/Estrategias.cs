@@ -39,7 +39,7 @@ public class Pro<T>: IEstrategia<T>
         {
             return (MetodosAuxiliares.PrimerDoble<T>(mano),0,0);
         }
-        int[,,] Posibilitys = new int[mano.Count(),disp.Length,mano.First().values.Length];
+        double[,,] Posibilitys = new double[mano.Count(),disp.Length,mano.First().values.Length];
         int f=0;
         foreach(var ficha in mano)
         {
@@ -52,9 +52,7 @@ public class Pro<T>: IEstrategia<T>
                         continue;
                     Posibilitys[f,i,j]=6;
                     if(Referida.Jugador.Equipo!=EquipoDelJugador)
-                        Posibilitys[f,i,j]+=1;
-                    else
-                        Posibilitys[f,i,j]-=1;
+                        Posibilitys[f,i,j]+=0.5;
                     for(int k=0;k<ficha.values.Length;k++)
                     {
                         if(k==j)

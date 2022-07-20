@@ -1,9 +1,9 @@
 @using DominoServer.Pages.Components
-@page "/Game"
+@page "/GameChar"
 
 <PageTitle>Game</PageTitle>
 
-@if(Bridge.torneo==null)
+@if(Bridge2.torneo==null)
 {
     <div style="background-color: white; color:black; padding:10%; margin-bottom:2%;">
         <p style="display:none;">@(TodoCorrecto=false)</p>
@@ -36,56 +36,56 @@
     <div id="resumen">
         <div>    
             <div>
-                <p>@(Bridge.jugadores[0].Nombre):</p>
-                @if(Bridge.escenas.Current.manos[Bridge.jugadores[0]].Count==0)
+                <p>@(Bridge2.jugadores[0].Nombre):</p>
+                @if(Bridge2.escenas.Current.manos[Bridge2.jugadores[0]].Count==0)
                 {
                     <p>Se pego</p>
                 }
-                @foreach (var item in Bridge.escenas.Current.manos[Bridge.jugadores[0]].ToArray())
+                @foreach (var item in Bridge2.escenas.Current.manos[Bridge2.jugadores[0]].ToArray())
                 {   
-                    <Piece horizontal=false ficha=item></Piece>
+                    <PieceChar horizontal=false ficha=item></PieceChar>
                 }
             </div>
             
             <div>
-                <p>@(Bridge.jugadores[1].Nombre):</p>
-                @if(Bridge.escenas.Current.manos[Bridge.jugadores[1]].Count==0)
+                <p>@(Bridge2.jugadores[1].Nombre):</p>
+                @if(Bridge2.escenas.Current.manos[Bridge2.jugadores[1]].Count==0)
                 {
                     <p>Se pego</p>
                 }
-                @foreach (var item in Bridge.escenas.Current.manos[Bridge.jugadores[1]].ToArray())
+                @foreach (var item in Bridge2.escenas.Current.manos[Bridge2.jugadores[1]].ToArray())
                 {   
-                    <Piece horizontal=false ficha=item></Piece>    
+                    <PieceChar horizontal=false ficha=item></PieceChar>    
                 }
             </div>
     </div>
 
-    @if(Bridge.jugadores.Length>=3)
+    @if(Bridge2.jugadores.Length>=3)
     { 
         <div>       
             <div>
-                <p>@(Bridge.jugadores[2].Nombre):</p>
-                @if(Bridge.escenas.Current.manos[Bridge.jugadores[2]].Count==0)
+                <p>@(Bridge2.jugadores[2].Nombre):</p>
+                @if(Bridge2.escenas.Current.manos[Bridge2.jugadores[2]].Count==0)
                 {
                     <p>Se pego</p>
                 }
-                @foreach (var item in Bridge.escenas.Current.manos[Bridge.jugadores[2]].ToArray())
+                @foreach (var item in Bridge2.escenas.Current.manos[Bridge2.jugadores[2]].ToArray())
                 {   
-                    <Piece horizontal=false ficha=item></Piece>
+                    <PieceChar horizontal=false ficha=item></PieceChar>
                 }
             </div>
 
-            @if(Bridge.jugadores.Length>=4)
+            @if(Bridge2.jugadores.Length>=4)
             {
                 <div style="display: flex;">
-                    <p>@(Bridge.jugadores[3].Nombre):</p>
-                    @if(Bridge.escenas.Current.manos[Bridge.jugadores[3]].Count==0)
+                    <p>@(Bridge2.jugadores[3].Nombre):</p>
+                    @if(Bridge2.escenas.Current.manos[Bridge2.jugadores[3]].Count==0)
                     {
                         <p>Se pego</p>
                     }
-                    @foreach (var item in Bridge.escenas.Current.manos[Bridge.jugadores[3]].ToArray())
+                    @foreach (var item in Bridge2.escenas.Current.manos[Bridge2.jugadores[3]].ToArray())
                     {   
-                        <Piece horizontal=false ficha=item></Piece>
+                        <PieceChar horizontal=false ficha=item></PieceChar>
                     }
                 </div>
             }
@@ -97,7 +97,7 @@
     <div style="display: flex;align-items:center;">
         <div style="border:solid; width:50% ;margin-top:3%;margin-bottom:3%; border-radius:20px;">
             <p class="JuegoTerminado" style="font-size:60px; margin:1%">Puntuaciones</p>
-                @foreach(var item in Bridge.torneo!.Scores)
+                @foreach(var item in Bridge2.torneo!.Scores)
                 {
                     <p class="JuegoTerminado" style="font-size:30px; text-decoration:none;margin:0.5%">Equipo# @(item.Key): @item.Value</p> 
                 }
@@ -123,16 +123,16 @@
     
     <div class="Final">
         <div>
-            <p>Equipo #@Bridge.torneo!.Ganador</p>
-            @foreach (var item in Bridge.jugadores)
+            <p>Equipo #@Bridge2.torneo!.Ganador</p>
+            @foreach (var item in Bridge2.jugadores)
             {
-                @if(Bridge.torneo!.Ganador==item.Equipo)
+                @if(Bridge2.torneo!.Ganador==item.Equipo)
                 {<p>@item.Nombre</p>}        
             }
         </div>
         <div>
             <p>Puntuacion:</p> 
-            <p>@Bridge.torneo.Scores[Bridge.torneo.Ganador]</p>
+            <p>@Bridge2.torneo.Scores[Bridge2.torneo.Ganador]</p>
         </div>
     </div>
 
@@ -166,14 +166,14 @@
                 </button>
             </div>
             <div class="ManoVertical">
-                <h1>@(Bridge.jugadores[1].Nombre)</h1>
-                @foreach (var item in Bridge.escenas.Current.manos[Bridge.jugadores[1]].ToArray())
+                <h1>@(Bridge2.jugadores[1].Nombre)</h1>
+                @foreach (var item in Bridge2.escenas.Current.manos[Bridge2.jugadores[1]].ToArray())
                 {
-                    <Piece horizontal ficha=item></Piece>
+                    <PieceChar horizontal ficha=item></PieceChar>
                 }
             </div>
             <div class="corner">
-                @foreach(var item in Bridge.torneo!.Scores)
+                @foreach(var item in Bridge2.torneo!.Scores)
                 {
                     <p>Equipo# @(item.Key): @item.Value</p> 
                 }
@@ -182,28 +182,28 @@
 
         <div style="flex-direction:column; width:1100px;">
             <div class="ManoHorizontal">
-                <h1>@(Bridge.jugadores[0].Nombre)</h1>
-                @foreach (var item in Bridge.escenas.Current.manos[Bridge.jugadores[0]].ToArray())
+                <h1>@(Bridge2.jugadores[0].Nombre)</h1>
+                @foreach (var item in Bridge2.escenas.Current.manos[Bridge2.jugadores[0]].ToArray())
                 {
-                    <Piece horizontal=false ficha=item></Piece>                    
+                    <PieceChar horizontal=false ficha=item></PieceChar>                    
                 }
             </div>
 
             <div id="mesa" style=@mesa()>
-                @foreach (var item in Bridge.escenas.Current.Tablero.ToArray())
+                @foreach (var item in Bridge2.escenas.Current.Tablero.ToArray())
                 {
                     <div>
-                        <Piece ficha=item horizontal=@(!esdoble(item.values))></Piece>
+                        <PieceChar ficha=item horizontal=@(!esdoble(item.values))></PieceChar>
                     </div>
                 }
             </div>
-            @if(Bridge.jugadores.Length>=3)
+            @if(Bridge2.jugadores.Length>=3)
             {
             <div class="ManoHorizontal">
-                <h1>@(Bridge.jugadores[2].Nombre)</h1>
-                @foreach (var item in Bridge.escenas.Current.manos[Bridge.jugadores[2]].ToArray())
+                <h1>@(Bridge2.jugadores[2].Nombre)</h1>
+                @foreach (var item in Bridge2.escenas.Current.manos[Bridge2.jugadores[2]].ToArray())
                 {
-                    <Piece horizontal=false ficha=item></Piece>
+                    <PieceChar horizontal=false ficha=item></PieceChar>
                 }
             </div>
             }
@@ -215,21 +215,21 @@
                     <p>↩</p>
                 </button>
             </div>
-            @if(Bridge.jugadores.Length>=4)
+            @if(Bridge2.jugadores.Length>=4)
             {
             <div class="ManoVertical">
                 
-                <h1>@(Bridge.jugadores[3].Nombre)</h1>
-                @foreach (var item in Bridge.escenas.Current.manos[Bridge.jugadores[3]].ToArray())
+                <h1>@(Bridge2.jugadores[3].Nombre)</h1>
+                @foreach (var item in Bridge2.escenas.Current.manos[Bridge2.jugadores[3]].ToArray())
                 {
-                    <Piece ficha=item horizontal></Piece>
+                    <PieceChar ficha="item" horizontal></PieceChar>
                 }
             </div>
             }
 
         <div class="corner">
             <h3>Jugador Actual</h3>
-            <p style="font-size: 25px; text-align: center;">@Bridge.escenas.Current.JugadorUltimaJugada.Nombre</p>
+            <p style="font-size: 25px; text-align: center;">@Bridge2.escenas.Current.JugadorUltimaJugada.Nombre</p>
         </div>
         </div>
 
@@ -246,14 +246,14 @@
     {
         salir=!salir;
     }
-    void NextPlay() {EndOfTheRound=!Bridge.escenas.MoveNext();}
+    void NextPlay() {EndOfTheRound=!Bridge2.escenas.MoveNext();}
 
     void NextRound()
     {
-        if(Bridge.juegos.MoveNext())
+        if(Bridge2.juegos.MoveNext())
         {
             EndOfTheRound=false;
-            Bridge.escenas=Bridge.juegos.Current.GetEnumerator();
+            Bridge2.escenas=Bridge2.juegos.Current.GetEnumerator();
             NextPlay();
         }
         else
@@ -269,13 +269,13 @@
 
     protected override void OnInitialized()
     {
-        Bridge.torneo=new DominoGame.Torney<int>(Bridge.jugadores,Bridge.reglas);
-        Bridge.juegos=Bridge.torneo.GetEnumerator();
-        if(Bridge.juegos.MoveNext())
+        Bridge2.torneo=new DominoGame.Torney<char>(Bridge2.jugadores,Bridge2.reglas);
+        Bridge2.juegos=Bridge2.torneo.GetEnumerator();
+        if(Bridge2.juegos.MoveNext())
         {
-            Bridge.escenas=Bridge.juegos.Current.GetEnumerator();
-            if(Bridge.escenas.MoveNext())
-                Bridge.escenaActual=Bridge.escenas.Current;
+            Bridge2.escenas=Bridge2.juegos.Current.GetEnumerator();
+            if(Bridge2.escenas.MoveNext())
+                Bridge2.escenaActual=Bridge2.escenas.Current;
         }
         TodoCorrecto=true;
         EndOfTheTorney=false;
@@ -285,7 +285,7 @@
 
     string mesa()
     {
-        if(Bridge.escenas.Current.Tablero.ToArray().Length>10)return "justify-content:flex-start;";
+        if(Bridge2.escenas.Current.Tablero.ToArray().Length>10)return "justify-content:flex-start;";
         return "";
     }
 }

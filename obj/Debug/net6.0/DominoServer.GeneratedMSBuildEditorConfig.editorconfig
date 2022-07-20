@@ -26,8 +26,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tcG9uZW50c1xQaWVjZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Pages/Components/PieceChar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tcG9uZW50c1xQaWVjZUNoYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Pages/Game.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2FtZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Pages/GameChar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2FtZUNoYXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Javier/Desktop/Domino/intento de parte visual/DominoServer/Pages/Index.razor]

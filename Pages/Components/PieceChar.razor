@@ -1,0 +1,17 @@
+<div class=@(horizontal?"fichaH":"fichaV")>
+    @foreach(var item2 in ficha.values)
+    {
+        <div>
+            <div  style="flex:1; justify-content:center;aling-items:center;justify-content:center;">
+                <p style="font-size: 20px;">@item2</p>
+            </div>
+        </div>   
+    }
+</div>
+
+@code{
+    [Parameter]
+    public DominoTable.Piece<char> ficha{get;set;}=new DominoTable.Piece<char>();
+    [Parameter]
+    public bool horizontal{get;set;}=true;
+}
