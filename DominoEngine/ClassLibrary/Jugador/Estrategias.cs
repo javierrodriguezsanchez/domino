@@ -35,9 +35,8 @@ public class Pro<T>: IEstrategia<T>
 {
     public (Piece<T>, int, int) Play(IEnumerable<Piece<T>> mano, T[] disp, IEnumerable<Jugada<T>> Historial,IEnumerable<Pase<T>> pases, Rules<T> reglas, bool nuevaMesa,int EquipoDelJugador)
     {
-        if(nuevaMesa)
-        {
-            return (MetodosAuxiliares.PrimerDoble<T>(mano),0,0);
+        if(nuevaMesa){
+            return MetodosAuxiliares.CogerPrimera(mano, disp, reglas, nuevaMesa);
         }
         double[,,] Posibilitys = new double[mano.Count(),disp.Length,mano.First().values.Length];
         int f=0;
@@ -153,16 +152,5 @@ static class MetodosAuxiliares{
         
         return (new Piece<T>(), int.MaxValue,int.MaxValue);
    }
-   public static Piece<T> PrimerDoble<T>(IEnumerable<Piece<T>> mano)
-   //Dado un conjunto de fichas, devuelve el primer doble
-   {
-        foreach(var ficha in mano)
-        {
-            if(ficha.values.Distinct().Count()==1)
-                return ficha;
-        }
-        return mano.First();
-   }
- 
 }
 }
